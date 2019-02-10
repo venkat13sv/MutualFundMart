@@ -2,51 +2,59 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { userActions } from '/_actions';
+import  {userActions}   from '../../_actions/user.actions.js';
 
-export default class SignUp extends React.Component {
 
+class SignUp extends React.Component {
   constructor(props) {
-       super(props);
+         super(props);
 
-       // reset login status
-       this.props.dispatch(userActions.logout());
+         this.state = {
+             user: {
+                 firstName: '',
+                 lastName: '',
+                 email:'',
+                 username: '',
+                 password: ''
+             },
+             submitted: false
+         };
 
-       this.state = {
-           username: '',
-           password: '',
-           submitted: false
-       };
+         this.handleChange = this.handleChange.bind(this);
+         this.handleSubmit = this.handleSubmit.bind(this);
+     }
 
-       this.handleChange = this.handleChange.bind(this);
-       this.handleSubmit = this.handleSubmit.bind(this);
-   }
+     handleChange(event) {
+         const { name, value } = event.target;
+         const { user } = this.state;
+         this.setState({
+             user: {
+                 ...user,
+                 [name]: value
+             }
+         });
+     }
 
-   handleChange(e) {
-       const { name, value } = e.target;
-       this.setState({ [name]: value });
-   }
+     handleSubmit(event) {
+         event.preventDefault();
 
-   handleSubmit(e) {
-       e.preventDefault();
-
-       this.setState({ submitted: true });
-       const { username, password } = this.state;
-       const { dispatch } = this.props;
-       if (username && password) {
-           dispatch(userActions.login(username, password));
-       }
-   }
-
-
+         this.setState({ submitted: true });
+         const { user } = this.state;
+         const { dispatch } = this.props;
+           console.log("Code Ok");
+         if (user.firstName && user.lastName  &&  user.password) {
+            // dispatch(userActions.register(user));
+            console.log("Code Ok");
+         }
+     }
 
     render() {
-      const { loggingIn } = this.props;
-      const { username, password, submitted } = this.state;
+              const { registering  } = this.props;
+              const { user, submitted } = this.state;
         return (
 
 <div>
-    													<div className="modal fade" id="myModal3" tabindex="-1" role="dialog">
+    													<div className="modal fade" id="myModal3" tabIndex="-1" role="dialog">
     														<div className="modal-dialog">
 
     															<div className="modal-content">
@@ -59,10 +67,11 @@ export default class SignUp extends React.Component {
     																				<form action="#" method="post"  onSubmit={this.handleSubmit}>
 
 
-    																				  <input type="text" name="name" placeholder="Username" required="" value={username} onChange={this.handleChange}/>
-    																					<input type="email" name="email" placeholder="Email" required="" value={password} onChange={this.handleChange}  />
-    																					<input type="password" name="password" placeholder="Password" required="" />
-    																					<input type="password" name="password" placeholder="Confirm Password" required="" />
+    																				  <input type="text" name="firstName" placeholder="Firstname" required="" value={ user.firstName } onChange={this.handleChange} />
+                                              <input type="text" name="lastName" placeholder="LastName" required="" value={ user.lastName } onChange={this.handleChange} />
+    																					<input type="email" name="email" placeholder="Email" required="" value={user.email} onChange={this.handleChange}  />
+    																					<input type="password" name="password" placeholder="Password" required="" value={user.password} onChange={this.handleChange} />
+    																					<input type="password" name="cpassword" placeholder="Confirm Password" required="" />
     																					<input type="submit" value="Sign Up" />
     																				</form>
     																			</div>
@@ -76,4 +85,14 @@ export default class SignUp extends React.Component {
          </div>
        );
               }
-       }
+
+}
+function mapStateToProps(state) {
+    const { registering } = state.registration;
+    return {
+        registering
+    };
+}
+
+const connectedRegisterPage = connect(mapStateToProps)(SignUp);
+export { connectedRegisterPage as SignUp };
