@@ -1,5 +1,5 @@
 import React from 'react';
-import SignIn from './SignIn';
+import {SignIn} from './SignIn';
 import { SignUp } from './SignUp';
 import SearchItem from './SearchItem';
 export default class Navigation extends React.Component {

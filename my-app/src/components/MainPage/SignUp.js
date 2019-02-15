@@ -43,8 +43,8 @@ class SignUp extends React.Component {
          const { dispatch } = this.props;
            console.log("Code Ok");
          if (user.firstName && user.lastName  &&  user.password) {
-            // dispatch(userActions.register(user));
-            console.log("Code Ok");
+             dispatch(userActions.register(user));
+          //  console.log("Code Ok");
          }
      }
 

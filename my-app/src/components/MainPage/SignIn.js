@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import  {userActions}   from '../../_actions/user.actions.js';
-export default class SignIn extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
        super(props);
 
        // reset login status
-    //   this.props.dispatch(userActions.logout());
+    this.props.dispatch(userActions.logout());
 console.log("Props"+ JSON.stringify(this.props));
        this.state = {
            username: '',
@@ -33,6 +33,7 @@ console.log("Props"+ JSON.stringify(this.props));
        const { dispatch } = this.props;
        if (username && password) {
            dispatch(userActions.login(username, password));
+           
        }
    }
     render() {
@@ -49,11 +50,11 @@ console.log("Props"+ JSON.stringify(this.props));
                                             <div className="signin-form profile">
                                             <h3 className="agileinfo_sign">Sign In</h3>
                                                 <div className="login-form">
-                                                  <form action="#" method="post">
-                                                    <input type="email" name="email" placeholder="E-mail" required="" />
-                                                    <input type="password" name="password" placeholder="Password" required="" />
+                                                  <form action="#" method="post" onSubmit={this.handleSubmit}>
+                                                    <input type="email" name="username" placeholder="E-mail" value={username}  onChange={this.handleChange} required="" />
+                                                    <input type="password" name="password" placeholder="Password" value={password}  onChange={this.handleChange} required="" />
                                                     <div className="tp">
-                                                      <input type="submit" value="Sign In" />
+                                                      <input type="submit"  value="Sign In" />
                                                     </div>
                                                   </form>
                                                 </div>
@@ -69,6 +70,7 @@ console.log("Props"+ JSON.stringify(this.props));
                                           </div>
                                         </div>
                                       </div>
+
                                     </div>
 
         );

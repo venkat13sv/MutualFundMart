@@ -12,7 +12,7 @@ router.put('/:id', update);
 router.delete('/:id', _delete);
 
 module.exports = router;
-
+console.log("Include Ok");
 function authenticate(req, res, next) {
     userService.authenticate(req.body)
         .then(user => user ? res.json(user) : res.status(400).json({ message: 'Username or password is incorrect' }))
@@ -20,6 +20,7 @@ function authenticate(req, res, next) {
 }
 
 function register(req, res, next) {
+  console.log("Register function OK");
     userService.create(req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
