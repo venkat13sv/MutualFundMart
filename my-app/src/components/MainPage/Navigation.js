@@ -11,10 +11,10 @@ export default class Navigation extends React.Component {
 		<div className="w3layouts_header_right">
 			<div className="agileits-social top_content">
 					<ul>
-							<li><a href="#"><i className="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i className="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i className="fa fa-rss"></i></a></li>
-							<li><a href="#"><i className="fa fa-vk"></i></a></li>
+							<li><a href="/"><i className="fa fa-facebook"></i></a></li>
+							<li><a href="/"><i className="fa fa-twitter"></i></a></li>
+							<li><a href="/"><i className="fa fa-rss"></i></a></li>
+							<li><a href="/"><i className="fa fa-vk"></i></a></li>
 						</ul>
 				</div>
 		</div>
