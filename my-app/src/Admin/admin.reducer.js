@@ -11,6 +11,7 @@ export function adminReducers(state={},action)
         loggingIn: true,
         admin:action.admin
       };
+      break;
     }
     case adminConstants.ADMIN_LOGIN_SUCCESS:
     {
@@ -19,6 +20,7 @@ export function adminReducers(state={},action)
           loggedIn: true,
           admin:action.admin
       };
+      break;
     }
     case adminConstants.ADMIN_LOGIN_FAILURE:
       return {};

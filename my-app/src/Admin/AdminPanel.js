@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 class AdminPanel extends React.Component {
 constructor(props) {
   super(props);
+  console.log(this.props)
 }
 handleChange(e) {
 
@@ -13,31 +14,56 @@ handleSubmit(e) {
 
 }
 render() {
-
+  const {admin}=this.props;
 return (
+
   <div>
-  <div className="container">
-  <h2>Horizontal form</h2>
+  <nav className="navbar navbar-inverse">
+    <div className="container-fluid">
+      <div className="navbar-header">
+        <a className="navbar-brand" href="#" style={{"color":"#ffffffd4"}}>Funding Admin Panel</a>
+      </div>
+      <ul className="nav navbar-nav">
+        <li className="active"><a href="#">Home</a></li>
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+      </ul>
+      <ul className="nav navbar-nav navbar-right">
+        <li><a href="#"><span className="glyphicon glyphicon-user"></span> </a></li>
+        <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+
+
+<div>
+<h2>Adding New Scheme</h2>
+
   <form className="form-horizontal" action="/action_page.php">
     <div className="form-group">
-      <label className="control-label col-sm-2" for="email">Email:</label>
-      <div className="col-sm-10">
-        <input type="email" className="form-control" id="email" placeholder="Enter email" name="email" />
+      <label className="control-label col-sm-2" htmlFor="email">Sheme Name:</label>
+      <div className="col-sm-5">
+        <input type="text" className="form-control" id="sname" placeholder="Scheme Name" name="sname" />
       </div>
     </div>
     <div className="form-group">
-      <label className="control-label col-sm-2" for="pwd">Password:</label>
-      <div className="col-sm-10">
-        <input type="password" className="form-control" id="pwd" placeholder="Enter password" name="pwd" />
+      <label className="control-label col-sm-2" htmlFor="email">Company:</label>
+      <div className="col-sm-5">
+        <input type="text" className="form-control" id="cname" placeholder="Company Name" name="cname" />
       </div>
     </div>
     <div className="form-group">
-      <div className="col-sm-offset-2 col-sm-10">
-        <div className="checkbox">
-          <label><input type="checkbox" name="remember" /> Remember me</label>
+      <label className="control-label col-sm-2" htmlFor="sel1">Select category:</label>
+        <div className="col-sm-5">
+        <select className="form-control" id="sel1">
+          <option>Equity</option>
+          <option>Tax saving</option>
+          <option>Long term</option>
+          <option>Debt</option>
+        </select>
         </div>
-      </div>
     </div>
+
     <div className="form-group">
       <div className="col-sm-offset-2 col-sm-10">
         <button type="submit" className="btn btn-default">Submit</button>
@@ -51,6 +77,7 @@ return (
        }
 }
 function mapStateToProps(state) {
+    console.log("state "+ JSON.stringify(state.adminReducers));
     const {  adminReducers } = state;
     const { admin } = adminReducers;
     return {
