@@ -34,7 +34,7 @@ export default class Navigation extends React.Component {
 					<div className="header_contact_details_agile"><i className="fa fa-envelope-o" aria-hidden="true"></i>
 						<div className="w3l_header_contact_details_agile">
 							 <div className="header-contact-detail-title">Send us a Message</div>
-							<a href="mailto:info@example.com">info@example.com</a>
+							<a href="mailto:info@example.com">info@funding.com</a>
 						</div>
 				   </div>
 			    </li>
@@ -82,15 +82,15 @@ export default class Navigation extends React.Component {
 					<ul className="nav navbar-nav">
 						<li className="active"><a href="index.html"><span data-hover="Home">Home</span></a></li>
 						<li><a href="about.html"><span data-hover="About Us">About Us</span></a></li>
-						<li><a href="events.html"><span data-hover="Events">Events</span></a></li>
+						<li><a href="events.html"><span data-hover="Events">Products</span></a></li>
 						<li className="dropdown">
-							<a href="#" className="dropdown-toggle" data-toggle="dropdown"><span data-hover="Short Codes">Short Codes</span> <b className="caret"></b></a>
+							<a href="#" className="dropdown-toggle" data-toggle="dropdown"><span data-hover="Categories">Categories</span> <b className="caret"></b></a>
 							<ul className="dropdown-menu agile_short_dropdown">
-								<li><a href="icons.html">Web Icons</a></li>
-								<li><a href="typography.html">Typography</a></li>
+								<li><a href="icons.html">Equity</a></li>
+								<li><a href="typography.html">Tax savings</a></li>
 							</ul>
 						</li>
-						<li><a href="mail.html"><span data-hover="Mail Us">Mail Us</span></a></li>
+						<li><a href="/contact"><span data-hover="Mail Us">Contact Us</span></a></li>
 					</ul>
 				</nav>
 

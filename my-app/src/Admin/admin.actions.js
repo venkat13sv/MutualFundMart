@@ -15,7 +15,7 @@ function login(adminname, password) {
                 admin => {
                     dispatch(success(admin));
                     console.log("Admin ok");
-                    window.location='/admin/panel';
+                    //window.location='/admin/panel';
                 },
                 error => {
                     dispatch(failure(error.toString()));

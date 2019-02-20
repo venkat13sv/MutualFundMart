@@ -11,7 +11,7 @@ class ContactUs extends Component {
       <Navigation></Navigation>
       <div class="team">
 		    <div class="container">
-		        <h3 class="w3l_header w3_agileits_header">Mail <span>Us</span></h3>
+		        <h3 class="w3l_header w3_agileits_header">Contact <span>Us</span></h3>
 		            <p class="sub_para_agile">Add Some Short Description</p>
                   <ContactUsForm></ContactUsForm>
         </div>

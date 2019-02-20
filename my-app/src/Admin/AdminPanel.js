@@ -77,7 +77,7 @@ return (
        }
 }
 function mapStateToProps(state) {
-    console.log("state "+ JSON.stringify(state.adminReducers));
+    console.log("state "+ JSON.stringify(state));
     const {  adminReducers } = state;
     const { admin } = adminReducers;
     return {
