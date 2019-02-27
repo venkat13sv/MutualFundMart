@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import { store } from '../_helpers/store.js';
 import  {adminActions}   from './admin.actions.js';
+
 class Admin extends React.Component {
   constructor(props) {
        super(props);
 
        // reset login status
+       this.props.dispatch(adminActions.logout());
        this.state = {
            adminname: '',
            password: '',
@@ -33,9 +35,10 @@ class Admin extends React.Component {
            dispatch(adminActions.login(adminname, password));
 
        }
+      // console.log("Log store "+ JSON.stringify(store.getState()));
    }
     render() {
-      const { loggingIn,loggedIn,user } = this.props;
+      const { loggingIn } = this.props;
 
       const { adminname, password, submitted } = this.state;
         return (
@@ -70,10 +73,10 @@ class Admin extends React.Component {
       }
 }
 function mapStateToProps(state) {
-  const { loggingIn,loggedIn,admin } = state.adminReducers;
+  const { loggingIn } = state.adminReducers;
   return {
-  loggingIn,loggedIn,admin
+  loggingIn
   };
 }
-const connectedLoginPage = connect(mapStateToProps)(Admin);
-export { connectedLoginPage as Admin };
+const connectedAdminLoginPage = connect(mapStateToProps)(Admin);
+export { connectedAdminLoginPage as Admin };

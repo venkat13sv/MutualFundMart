@@ -19,7 +19,7 @@ function login(username, password) {
             .then(
                 user => {
                     dispatch(success(user));
-                    window.location='/home';
+                  //  window.location='/home';
                 },
                 error => {
                     dispatch(failure(error.toString()));

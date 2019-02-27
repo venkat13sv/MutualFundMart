@@ -1,9 +1,11 @@
 import { adminConstants } from './admin.constants.js';
 import { adminService } from './admin.service.js';
 import { alertActions } from '../_actions/alert.actions.js';
+import { store } from '../_helpers/store.js';
 
 export const adminActions = {
-    login
+    login,
+    logout
 };
 
 function login(adminname, password) {
@@ -13,11 +15,14 @@ function login(adminname, password) {
         adminService.login(adminname, password)
             .then(
                 admin => {
+
                     dispatch(success(admin));
-                    console.log("Admin ok");
-                    //window.location='/admin/panel';
+                    window.location='/admin/panel';
+
+
                 },
                 error => {
+                    console.log("error"+ error.toString());
                     dispatch(failure(error.toString()));
                     dispatch(alertActions.error(error.toString()));
                 }
@@ -27,4 +32,9 @@ function login(adminname, password) {
     function request(admin) { return { type: adminConstants.ADMIN_LOGIN_REQUEST, admin } }
     function success(admin) { return { type: adminConstants.ADMIN_LOGIN_SUCCESS, admin } }
     function failure(error) { return { type: adminConstants.ADMIN_LOGIN_FAILURE, error } }
+}
+
+function logout() {
+    adminService.logout();
+    return { type: adminConstants.ADMIN_LOGOUT };
 }

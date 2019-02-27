@@ -9,7 +9,7 @@ import {SignIn} from './MainPage/SignIn.js';
 import {SignUp} from './MainPage/SignUp.js';
 import ContactUs from './MainPage/ContactUs.js';
 //import { PrivateRoute } from './PrivateRoute/PrivateRoute.js';
-import { Admin } from '../Admin/Admin.js';
+import { Admin }  from '../Admin/Admin.js';
 import { AdminPanel } from '../Admin/AdminPanel.js';
 
 const Root=()=>(

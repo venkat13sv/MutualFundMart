@@ -1,10 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+//import { store } from '../_helpers';
+import { adminActions } from './admin.actions.js';
+import { history } from '../_helpers/history.js';
+
+
 class AdminPanel extends React.Component {
 constructor(props) {
   super(props);
-  console.log(this.props)
+  if(!this.props.admin)
+   window.location=("/admin");
+
+   this.state = {
+       sname: '',
+       cname: '',
+       category:'',
+       submitted: false
+   };
+
+   this.handleChange = this.handleChange.bind(this);
+   this.handleSubmit = this.handleSubmit.bind(this);
+}
+logOutHandler=(e)=>{
+  this.props.dispatch(adminActions.logout);
+   window.location=("/admin");
 }
 handleChange(e) {
 
@@ -13,6 +33,7 @@ handleChange(e) {
 handleSubmit(e) {
 
 }
+
 render() {
   const {admin}=this.props;
 return (
@@ -25,12 +46,12 @@ return (
       </div>
       <ul className="nav navbar-nav">
         <li className="active"><a href="#">Home</a></li>
-        <li><a href="#"></a></li>
+        <li><a href="#">All</a></li>
         <li><a href="#"></a></li>
       </ul>
       <ul className="nav navbar-nav navbar-right">
-        <li><a href="#"><span className="glyphicon glyphicon-user"></span> </a></li>
-        <li><a href="#"><span className="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a href="#"><span className="glyphicon glyphicon-user"></span>{admin.aname}</a></li>
+        <li><a href="#" onClick={e=>this.logOutHandler(e)}><span className="glyphicon glyphicon-log-in"></span> Logout</a></li>
       </ul>
     </div>
   </nav>
@@ -63,6 +84,18 @@ return (
         </select>
         </div>
     </div>
+    <div className="form-group">
+      <label className="control-label col-sm-2" htmlFor="email">Initial amount:  ₹</label> 
+      <div className="col-sm-5">
+         <input type="text" className="form-control" id="cname" placeholder="Company Name" name="iamount" />
+      </div>
+    </div>
+    <div className="form-group">
+      <label className="control-label col-sm-2" htmlFor="email">Description :</label>
+      <div className="col-sm-5">
+        <textarea className=" form-control span6" rows="3" placeholder="Write about the scheme" required></textarea>
+      </div>
+    </div>
 
     <div className="form-group">
       <div className="col-sm-offset-2 col-sm-10">
@@ -78,6 +111,7 @@ return (
 }
 function mapStateToProps(state) {
     console.log("state "+ JSON.stringify(state));
+    console.log("state "+ JSON.stringify(state.adminReducers));
     const {  adminReducers } = state;
     const { admin } = adminReducers;
     return {

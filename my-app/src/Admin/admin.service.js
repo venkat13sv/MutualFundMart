@@ -1,7 +1,8 @@
 import { authHeader } from '../_helpers/auth-header.js';
 
 export const adminService = {
-    login
+    login,
+    logout
   };
   function login(aname, password) {
       const requestOptions = {
@@ -19,6 +20,12 @@ export const adminService = {
               return admin;
           });
   }
+
+  function logout() {
+      // remove user from local storage to log user out
+      localStorage.removeItem('admin');
+  }
+
   function handleResponse(response) {
       return response.text().then(text => {
           const data = text && JSON.parse(text);

@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('_helpers/jwt');
+//const mail=require('_helpers/verification');
 const errorHandler = require('_helpers/error-handler');
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,6 +21,8 @@ app.use('/admin',require('./admin/admin.controller'));
 
 // global error handler
 app.use(errorHandler);
+
+//mail.sendVerificationMail("95sivamani@gmail.com","sivamani");
 
 // start server
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 4000;

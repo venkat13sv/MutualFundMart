@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import  {userActions}   from '../../_actions/user.actions.js';
+
 class SignIn extends React.Component {
   constructor(props) {
        super(props);
 
        // reset login status
     this.props.dispatch(userActions.logout());
-console.log("Props"+ JSON.stringify(this.props));
+  //  console.log("Props"+ JSON.stringify(this.props));
        this.state = {
            username: '',
            password: '',
@@ -33,7 +33,7 @@ console.log("Props"+ JSON.stringify(this.props));
        const { dispatch } = this.props;
        if (username && password) {
            dispatch(userActions.login(username, password));
-           
+
        }
    }
     render() {
