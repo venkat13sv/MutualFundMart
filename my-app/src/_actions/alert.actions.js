@@ -1,10 +1,14 @@
 import { alertConstants } from '../_constants/alert.constants.js';
 
 export const alertActions = {
+    request,
     success,
     error,
     clear
 };
+function request(message){
+    return { type: alertConstants.REQUEST, message };
+}
 
 function success(message) {
     return { type: alertConstants.SUCCESS, message };

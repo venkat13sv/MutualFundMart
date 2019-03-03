@@ -5,5 +5,6 @@ mongoose.Promise = global.Promise;
 
 module.exports = {
     User: require('../users/user.model'),
-    Admin: require('../admin/admin.model')
+    Admin: require('../admin/admin.model'),
+    Scheme: require('../_model/scheme.model')
 };

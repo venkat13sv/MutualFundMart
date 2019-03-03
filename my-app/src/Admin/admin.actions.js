@@ -5,7 +5,8 @@ import { store } from '../_helpers/store.js';
 
 export const adminActions = {
     login,
-    logout
+    logout,
+    addNewScheme
 };
 
 function login(adminname, password) {
@@ -37,4 +38,25 @@ function login(adminname, password) {
 function logout() {
     adminService.logout();
     return { type: adminConstants.ADMIN_LOGOUT };
+}
+
+function addNewScheme(scheme){
+    return dispatch =>{
+      dispatch(alertActions.request("Adding new sheme"));
+
+      adminService.addNewScheme(scheme).then(
+        data=>{
+          dispatch(alertActions.success("Scheme added successfully"));
+          console.log("Data added");
+        },
+        error => {
+            console.log("error"+ error.toString());
+
+            dispatch(alertActions.error(error.toString()));
+        }
+      );
+    }
+
+
+
 }

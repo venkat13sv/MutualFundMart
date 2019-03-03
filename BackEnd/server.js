@@ -4,17 +4,23 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const jwt = require('_helpers/jwt');
+const db = require('_helpers/db');
+const bcrypt = require('bcryptjs');
+var morgan = require('morgan');
+
+app.use(morgan('dev'));
 //const mail=require('_helpers/verification');
 const errorHandler = require('_helpers/error-handler');
-
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(cors());
 
 // use JWT auth to secure the api
 app.use(jwt());
 
 
+//console.log(bcrypt.compareSync("admin", admin.hash));
 // api routes
 app.use('/users', require('./users/users.controller'));
 app.use('/admin',require('./admin/admin.controller'));

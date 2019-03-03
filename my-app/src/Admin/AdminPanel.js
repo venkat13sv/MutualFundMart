@@ -13,9 +13,14 @@ constructor(props) {
    window.location=("/admin");
 
    this.state = {
+       scheme:
+       {
        sname: '',
        cname: '',
-       category:'',
+       category:'yfg',
+       iamount:'',
+       description:''
+        },
        submitted: false
    };
 
@@ -26,17 +31,35 @@ logOutHandler=(e)=>{
   this.props.dispatch(adminActions.logout);
    window.location=("/admin");
 }
-handleChange(e) {
-
+handleChange(event) {
+  const { name, value } = event.target;
+  const { scheme } = this.state;
+  this.setState({
+      scheme: {
+          ...scheme,
+          [name]: value
+      }
+  });
 }
 
 handleSubmit(e) {
+  e.preventDefault();
+
+  this.setState({ submitted: true });
+  const { scheme } = this.state;
+  const { dispatch } = this.props;
+    console.log("Code Ok");
+  if (scheme.sname) {
+      dispatch(adminActions.addNewScheme(scheme));
+   //  console.log("Code Ok");
+  }
 
 }
 
 render() {
-  const {admin}=this.props;
-return (
+  const {admin,alert}=this.props;
+  const { scheme,submitted }= this.state;
+  return (
 
   <div>
   <nav className="navbar navbar-inverse">
@@ -59,18 +82,18 @@ return (
 
 <div>
 <h2>Adding New Scheme</h2>
-
-  <form className="form-horizontal" action="/action_page.php">
+  {submitted&&<p>{alert.message}</p>}
+  <form className="form-horizontal" onSubmit={this.handleSubmit}>
     <div className="form-group">
       <label className="control-label col-sm-2" htmlFor="email">Sheme Name:</label>
       <div className="col-sm-5">
-        <input type="text" className="form-control" id="sname" placeholder="Scheme Name" name="sname" />
+        <input type="text" className="form-control" id="sname" placeholder="Scheme Name" name="sname" value={scheme.sname} onChange={this.handleChange} />
       </div>
     </div>
     <div className="form-group">
       <label className="control-label col-sm-2" htmlFor="email">Company:</label>
       <div className="col-sm-5">
-        <input type="text" className="form-control" id="cname" placeholder="Company Name" name="cname" />
+        <input type="text" className="form-control" id="cname" placeholder="Company Name" name="cname" value={scheme.cname} onChange={this.handleChange} />
       </div>
     </div>
     <div className="form-group">
@@ -85,15 +108,15 @@ return (
         </div>
     </div>
     <div className="form-group">
-      <label className="control-label col-sm-2" htmlFor="email">Initial amount:  ₹</label> 
+      <label className="control-label col-sm-2" htmlFor="amount">Initial amount:  ₹</label>
       <div className="col-sm-5">
-         <input type="text" className="form-control" id="cname" placeholder="Company Name" name="iamount" />
+         <input type="text" className="form-control" id="cname" placeholder="Company Name" name="iamount" value={scheme.iamount} onChange={this.handleChange} />
       </div>
     </div>
     <div className="form-group">
-      <label className="control-label col-sm-2" htmlFor="email">Description :</label>
+      <label className="control-label col-sm-2" htmlFor="email" >Description :</label>
       <div className="col-sm-5">
-        <textarea className=" form-control span6" rows="3" placeholder="Write about the scheme" required></textarea>
+        <textarea className=" form-control span6" rows="3" placeholder="Write about the scheme" name="description" value={scheme.description}  onChange={this.handleChange} />
       </div>
     </div>
 
@@ -110,12 +133,11 @@ return (
        }
 }
 function mapStateToProps(state) {
-    console.log("state "+ JSON.stringify(state));
-    console.log("state "+ JSON.stringify(state.adminReducers));
-    const {  adminReducers } = state;
+
+    const {  adminReducers,alert } = state;
     const { admin } = adminReducers;
     return {
-           admin
+           admin,alert
     };
 }
 const connectedAdminPanel = connect(mapStateToProps)(AdminPanel);
