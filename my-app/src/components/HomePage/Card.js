@@ -10,13 +10,14 @@ export default class Card extends React.Component {
      }
      render() {
        return (
-         <div className="container web-align">
+
 
          <div id="DIV_1">
 	         <b id="B_2">{this.props.title}</b>
+          <br />
          </div>
-         <br />
-         </div>
+
+         
        );
      }
 }

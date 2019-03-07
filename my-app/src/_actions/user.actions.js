@@ -19,7 +19,7 @@ function login(username, password) {
             .then(
                 user => {
                     dispatch(success(user));
-                  //  window.location='/home';
+                    window.location='/home';
                 },
                 error => {
                     dispatch(failure(error.toString()));
@@ -47,7 +47,7 @@ function register(user) {
                 user => {
                     dispatch(success());
                     console.log("Registration successful");
-                    history.push('/login');
+                    history.push('/');
                     dispatch(alertActions.success('Registration successful'));
                 },
                 error => {

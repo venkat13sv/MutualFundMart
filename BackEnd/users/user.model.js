@@ -8,7 +8,8 @@ const schema = new Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     createdDate: { type: Date, default: Date.now },
-    isVerified: { type: Boolean, default: false}
+    isVerified: { type: Boolean, default: false},
+    token:{type:String,required:true}
 });
 
 schema.set('toJSON', { virtuals: true });

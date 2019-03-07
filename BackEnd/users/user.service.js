@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 const User = db.User;
+const mail=require('../_helpers/verification');
+const crypto=require('crypto');
 
 module.exports = {
     authenticate,
@@ -15,14 +17,22 @@ module.exports = {
 
 async function authenticate({ username, password }) {
     const user = await User.findOne({ username });
-    if (user && bcrypt.compareSync(password, user.hash)) {
-        const { hash, ...userWithoutHash } = user.toObject();
-        const token = jwt.sign({ sub: user.id }, config.secret);
-        return {
+    if(user.isVerified){
+      if (user && bcrypt.compareSync(password, user.hash)) {
+          const { hash, ...userWithoutHash } = user.toObject();
+          const token = jwt.sign({ sub: user.id }, config.secret);
+          return {
             ...userWithoutHash,
             token
-        };
+          };
     }
+    else {
+      throw "Invalid username or password.";
+    }
+  }
+  else{
+    throw "Please verify your Email Id.";
+  }
 }
 
 async function getAll() {
@@ -43,15 +53,18 @@ async function create(userParam) {
     const user = new User(userParam);
 
     user.username=userParam.email;
+
+  var token = crypto.randomBytes(64).toString('hex')
+  mail.sendVerificationMail(userParam.email,userParam.firstName,token);
+  user.token=token;
+  //console.log("token" + token +" user" + JSON.stringify(userParam));
+  if (userParam.password) {
+      user.hash = bcrypt.hashSync(userParam.password, 10);
+  }
+  await user.save();
+  console.log("Registeration:Database ok");
     // hash password
-    if (userParam.password) {
-        user.hash = bcrypt.hashSync(userParam.password, 10);
-    }
 
-
-    // save user
-    await user.save();
-    console.log("Registeration:Database ok");
 }
 
 async function update(id, userParam) {

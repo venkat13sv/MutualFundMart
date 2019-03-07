@@ -49,7 +49,7 @@ class SignUp extends React.Component {
      }
 
     render() {
-              const { registering  } = this.props;
+              const { registering ,alert } = this.props;
               const { user, submitted } = this.state;
         return (
 
@@ -63,6 +63,7 @@ class SignUp extends React.Component {
 
     																	<div className="signin-form profile">
     																	<h3 className="agileinfo_sign">Sign Up</h3>
+                                        {submitted&&alert.type=="alert-danger"&& <p style={{color:"red"}}>{alert.message}</p>}
     																			<div className="login-form">
     																				<form action="#" method="post"  onSubmit={this.handleSubmit}>
 
@@ -88,9 +89,9 @@ class SignUp extends React.Component {
 
 }
 function mapStateToProps(state) {
-    const { registering } = state.registration;
+    const { registering,alert } = state;
     return {
-        registering
+        registering,alert
     };
 }
 

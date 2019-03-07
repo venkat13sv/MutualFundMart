@@ -1,23 +1,32 @@
 export const dataService = {
 
-    getAll
+    getAllSchemes
 };
-function getAll() {
+function getAllSchemes() {
     const requestOptions = {
         method: 'GET'
     };
 
-    return fetch(`http://localhost:4000/schemes`, requestOptions).then(handleResponse);
+    return fetch(`http://localhost:4000/api/schemes`, requestOptions).then(handleResponse).then(
+      data=> {
+        //console.log("Schemes " + JSON.stringify(data ));
+        return data;
+      },
+      error=>{
+        console.log("Err "+ error);
+      }
+    );
 }
 
 function handleResponse(response) {
     return response.text().then(text => {
         const data = text && JSON.parse(text);
+      //  console.log("Schemes " + JSON.stringify(data ));
         console.log(response.status);
         if (!response.ok) {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
-                logout();
+            //    logout();
               //  location.reload(true);
             }
 

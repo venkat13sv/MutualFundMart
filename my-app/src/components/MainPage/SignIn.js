@@ -37,7 +37,7 @@ class SignIn extends React.Component {
        }
    }
     render() {
-      const { loggingIn } = this.props;
+      const { loggingIn,alert } = this.props;
       const { username, password, submitted } = this.state;
         return (
           <div className="modal fade" id="myModal2" tabIndex="-1" role="dialog">
@@ -49,6 +49,7 @@ class SignIn extends React.Component {
 
                                             <div className="signin-form profile">
                                             <h3 className="agileinfo_sign">Sign In</h3>
+                                            {submitted&&alert.type=="alert-danger"&& <p style={{color:"red"}}>{alert.message}</p>}
                                                 <div className="login-form">
                                                   <form action="#" method="post" onSubmit={this.handleSubmit}>
                                                     <input type="email" name="username" placeholder="E-mail" value={username}  onChange={this.handleChange} required="" />
@@ -78,8 +79,9 @@ class SignIn extends React.Component {
 }
 function mapStateToProps(state) {
   const { loggingIn } = state.authentication;
+  const { alert }=state;
   return {
-  loggingIn
+  loggingIn,alert
   };
 }
 const connectedLoginPage = connect(mapStateToProps)(SignIn);
