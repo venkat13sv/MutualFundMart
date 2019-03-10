@@ -9,7 +9,7 @@ function getAllSchemes() {
 
     return fetch(`http://localhost:4000/api/schemes`, requestOptions).then(handleResponse).then(
       data=> {
-        //console.log("Schemes " + JSON.stringify(data ));
+        console.log("Schemes " + JSON.stringify(data ));
         return data;
       },
       error=>{

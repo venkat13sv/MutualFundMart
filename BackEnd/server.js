@@ -25,6 +25,7 @@ app.use(jwt());
 app.use('/users', require('./users/users.controller'));
 app.use('/admin',require('./admin/admin.controller'));
 app.use('/api',require('./data/data.api'));
+app.use(require('./_helpers/verify.mail'));
 
 // global error handler
 app.use(errorHandler);

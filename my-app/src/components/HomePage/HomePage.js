@@ -71,6 +71,8 @@ class HomePage extends React.Component {
 			</div>
 		<SearchItem></SearchItem>
 		</nav>
+
+
 		</div>
     <div>
     <Schemes></Schemes>

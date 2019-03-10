@@ -14,7 +14,8 @@ function jwt() {
             '/users/authenticate',
             '/users/register',
             '/admin/authenticate',
-            '/api/schemes'
+            '/api/schemes',
+            '/verify'
 
 
 
