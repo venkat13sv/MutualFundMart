@@ -11,6 +11,7 @@ import ContactUs from './MainPage/ContactUs.js';
 //import { PrivateRoute } from './PrivateRoute/PrivateRoute.js';
 import { Admin }  from '../Admin/Admin.js';
 import { AdminPanel } from '../Admin/AdminPanel.js';
+import {CardView} from '../components/HomePage/CardView.js';
 
 const Root=()=>(
 
@@ -24,6 +25,7 @@ const Root=()=>(
                            <Route exact path="/contact" component={ContactUs} />
                            <Route exact path="/admin/panel" component={AdminPanel}/>
                            <Route exact path="/admin" component={Admin}/>
+                           <Route exact path="/schemes/view/:id" component={CardView}/>
 
                        </Switch>
                        </Provider>
