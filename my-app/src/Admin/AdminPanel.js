@@ -17,7 +17,7 @@ constructor(props) {
        {
        sname: '',
        cname: '',
-       category:'yfg',
+       category:'',
        iamount:'',
        description:''
         },
@@ -99,7 +99,7 @@ render() {
     <div className="form-group">
       <label className="control-label col-sm-2" htmlFor="sel1">Select category:</label>
         <div className="col-sm-5">
-        <select className="form-control" id="sel1">
+        <select className="form-control" name="category" value={scheme.category} onChange={this.handleChange} id="sel1">
           <option>Equity</option>
           <option>Tax saving</option>
           <option>Long term</option>

@@ -10,14 +10,27 @@ class CardView extends React.Component {
 
   constructor(props) {
        super(props);
-      if(!this.props.user)
-       window.location=("/")
+       const {id} = props.match.params;
+
+       let items=JSON.parse(localStorage.schemes);
+       if(!this.props.user)
+        window.location=("/");
+
+       this.state={
+         item:items[id],
+         isEmpty:false,
+         submitted:false
+       };
+
+       console.log("State: "+ this.state.item.sname);
 
      }
+
   logOutHandler=(e)=>{
     this.props.dispatch(userActions.logout);
      window.location=("/");
   }
+
     render() {
       const { user } = this.props;
         return (
@@ -74,9 +87,22 @@ class CardView extends React.Component {
 
 
 		</div>
-    <div  style={{ "marginTop": "100px","marginLeft": "100px"}}>
-     <div id="DIV_1" style={{"width": "800px","height":"800px"}}>
-     </div>
+    <div  style={{ "marginTop": "100px","marginLeft": "100px","width": "800px","height":"800px"}}>
+    <table>
+      <tbody>
+
+        <tr><td><h1 className="fundName">{this.state.item.sname}</h1></td></tr>
+        <tr><td><h6 className="fundName">Fund Details</h6></td></tr>
+        <tr><td>{this.state.item.cname}</td></tr>
+        <tr><td>{this.state.item.iamount}</td></tr>
+        <tr><td>{this.state.item.description}</td></tr>
+        <button type="button" class="btn btn-success">Invest Now</button>
+        <div>
+
+
+        </div>
+      </tbody>
+    </table>
     </div>
 </div>
 );

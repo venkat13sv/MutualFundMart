@@ -94,3 +94,13 @@
     font: normal normal 500 normal 15px / normal Roboto, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Oxygen, Ubuntu, Cantarell, "Droid Sans", "Helvetica Neue";
     outline: rgb(38, 50, 56) none 0px;
 }/*#B_2:before*/
+
+.fundName {
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1.5;
+    overflow: hidden;
+    max-width: 460px;
+    max-height: 80px;
+    letter-spacing: .5px;
+}

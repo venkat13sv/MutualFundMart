@@ -12,6 +12,7 @@ import ContactUs from './MainPage/ContactUs.js';
 import { Admin }  from '../Admin/Admin.js';
 import { AdminPanel } from '../Admin/AdminPanel.js';
 import {CardView} from '../components/HomePage/CardView.js';
+import  CheckoutForm  from '../components/Payment/Payment.js';
 
 const Root=()=>(
 
@@ -26,6 +27,7 @@ const Root=()=>(
                            <Route exact path="/admin/panel" component={AdminPanel}/>
                            <Route exact path="/admin" component={Admin}/>
                            <Route exact path="/schemes/view/:id" component={CardView}/>
+                           <Route exact path="/payment/checkoutform" component={CheckoutForm}/>
 
                        </Switch>
                        </Provider>

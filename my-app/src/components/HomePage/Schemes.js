@@ -17,10 +17,13 @@ class Schemes extends React.Component {
   }
   componentDidMount(){
     dataService.getAllSchemes().then(
-    items=>{this.setState({items: items , isEmpty: true });}
+    items=>{
+      this.setState({items: items , isEmpty: true });
+        console.log("this state" + JSON.stringify(this.state));
+  }
        );
 
-    console.log("this state" + JSON.stringify(this.state));
+
   }
   itemsContent(){
     if(this.state.isEmpty){
@@ -31,13 +34,13 @@ class Schemes extends React.Component {
     {
       hcontent.push(
       <tr id={"Row"+i}>
-        <td> <Link to="/schemes/view/1"> <Card style={{"float":"left"}}  schemeId={items1[i]._id}  title={items1[i].sname} item={items1[i]}></Card></Link></td>
+        <td> <Link to={"/schemes/view/"+i}> <Card style={{"float":"left"}}  schemeId={items1[i]._id}  title={items1[i].sname} item={items1[i]}></Card></Link></td>
 
 
-        <td> <Link to="/schemes/view/1"> <Card style={{"float":"left"}}  schemeId={items1[i+1]._id} title={items1[i+1].sname} item={items1[i+1]}></Card></Link></td>
+        <td> <Link to={"/schemes/view/"+(i+1)}> <Card style={{"float":"left"}}  schemeId={items1[i+1]._id} title={items1[i+1].sname} item={items1[i+1]}></Card></Link></td>
 
 
-        <td> <Link to="/schemes/view/1"> <Card  style={{"float":"left"}} schemeId={items1[i+1]._id} title={items1[i+2].sname} item={items1[i+2]}></Card></Link></td>
+        <td> <Link to={"/schemes/view/"+(i+2)}> <Card  style={{"float":"left"}} schemeId={items1[i+1]._id} title={items1[i+2].sname} item={items1[i+2]}></Card></Link></td>
           </tr>
 
       );
@@ -48,12 +51,16 @@ class Schemes extends React.Component {
       let leftItems=items1.length-count;
       if(leftItems)
       {
-        for(let i=count;i<items1.length;i++)
+        let i=count;
+        if(items1.length-count==2)
         {
           hcontent.push(
           <tr id={"Row"+i}>
-            <td>  <Card style={{"float":"left"}}  schemeId={items1[i]._id}  title={items1[i].sname} item={items1[i]}></Card></td>
+            <td> <Link to={"/schemes/view/"+i}> <Card style={{"float":"left"}}  schemeId={items1[i]._id}  title={items1[i].sname} item={items1[i]}></Card></Link></td>
+            {i<items1.length&&  <td> <Link to={"/schemes/view/"+(i+1)}> <Card style={{"float":"left"}}  schemeId={items1[i+1]._id}  title={items1[i+1].sname} item={items1[i+1]}></Card></Link></td>}
             </tr>
+
+
 
         );
         }
