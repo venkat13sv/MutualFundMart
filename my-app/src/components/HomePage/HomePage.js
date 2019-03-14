@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SearchItem from '../MainPage/SearchItem';
 import { history } from '../../_helpers/history.js';
 import  {userActions}   from '../../_actions/user.actions.js';
-import {  Schemes } from './Schemes.js'
+import {  Schemes } from './Schemes.js';
 
 class HomePage extends React.Component {
 

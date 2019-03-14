@@ -34,13 +34,13 @@ class Schemes extends React.Component {
     {
       hcontent.push(
       <tr id={"Row"+i}>
-        <td> <Link to={"/schemes/view/"+i}> <Card style={{"float":"left"}}  schemeId={items1[i]._id}  title={items1[i].sname} item={items1[i]}></Card></Link></td>
+        <td> <Link to={"/schemes/"+i}> <Card style={{"float":"left"}}  schemeId={items1[i]._id}  title={items1[i].sname} item={items1[i]}></Card></Link></td>
 
 
-        <td> <Link to={"/schemes/view/"+(i+1)}> <Card style={{"float":"left"}}  schemeId={items1[i+1]._id} title={items1[i+1].sname} item={items1[i+1]}></Card></Link></td>
+        <td> <Link to={"/schemes/"+(i+1)}> <Card style={{"float":"left"}}  schemeId={items1[i+1]._id} title={items1[i+1].sname} item={items1[i+1]}></Card></Link></td>
 
 
-        <td> <Link to={"/schemes/view/"+(i+2)}> <Card  style={{"float":"left"}} schemeId={items1[i+1]._id} title={items1[i+2].sname} item={items1[i+2]}></Card></Link></td>
+        <td> <Link to={"/schemes/"+(i+2)}> <Card  style={{"float":"left"}} schemeId={items1[i+1]._id} title={items1[i+2].sname} item={items1[i+2]}></Card></Link></td>
           </tr>
 
       );
@@ -56,8 +56,8 @@ class Schemes extends React.Component {
         {
           hcontent.push(
           <tr id={"Row"+i}>
-            <td> <Link to={"/schemes/view/"+i}> <Card style={{"float":"left"}}  schemeId={items1[i]._id}  title={items1[i].sname} item={items1[i]}></Card></Link></td>
-            {i<items1.length&&  <td> <Link to={"/schemes/view/"+(i+1)}> <Card style={{"float":"left"}}  schemeId={items1[i+1]._id}  title={items1[i+1].sname} item={items1[i+1]}></Card></Link></td>}
+            <td> <Link to={"/schemes/"+i}> <Card style={{"float":"left"}}  schemeId={items1[i]._id}  title={items1[i].sname} item={items1[i]}></Card></Link></td>
+            {i<items1.length&&  <td> <Link to={"/schemes/"+(i+1)}> <Card style={{"float":"left"}}  schemeId={items1[i+1]._id}  title={items1[i+1].sname} item={items1[i+1]}></Card></Link></td>}
             </tr>
 
 

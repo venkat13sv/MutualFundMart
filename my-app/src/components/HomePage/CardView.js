@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import SearchItem from '../MainPage/SearchItem';
 import { history } from '../../_helpers/history.js';
 import  {userActions}   from '../../_actions/user.actions.js';
-import {  Schemes } from './Schemes.js'
+import {  Schemes } from './Schemes.js';
+
 
 class CardView extends React.Component {
 
@@ -15,15 +16,20 @@ class CardView extends React.Component {
        let items=JSON.parse(localStorage.schemes);
        if(!this.props.user)
         window.location=("/");
-
+       this.handleClick = this.handleClick.bind(this);
        this.state={
          item:items[id],
          isEmpty:false,
-         submitted:false
+         submitted:false,
+         id:id
        };
 
        console.log("State: "+ this.state.item.sname);
 
+     }
+     handleClick() {
+       userActions.addItem(this.state.item);
+       console.log(JSON.stringify(this.props.cart));
      }
 
   logOutHandler=(e)=>{
@@ -96,7 +102,7 @@ class CardView extends React.Component {
         <tr><td>{this.state.item.cname}</td></tr>
         <tr><td>{this.state.item.iamount}</td></tr>
         <tr><td>{this.state.item.description}</td></tr>
-        <button type="button" class="btn btn-success">Invest Now</button>
+       <button type="button" class="btn btn-success" onClick={this.handleClick} style={{"float":"right"}}>Invest Now</button>
         <div>
 
 
@@ -109,10 +115,10 @@ class CardView extends React.Component {
        }
 }
 function mapStateToProps(state) {
-    const {  authentication } = state;
+    const {  authentication,cart } = state;
     const { user } = authentication;
     return {
-        user
+        user,cart
     };
 }
 

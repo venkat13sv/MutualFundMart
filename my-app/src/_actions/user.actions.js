@@ -8,6 +8,9 @@ export const userActions = {
     logout,
     register,
     getAll,
+    addItem,
+    deleteItem,
+    deleteAll,
     delete: _delete
 };
 
@@ -78,6 +81,17 @@ function getAll() {
     function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
 }
 
+function addItem(item){
+  localStorage.setItem('cart',item);
+  return dispatch=>dispatch({type:userConstants.ADD_CART_ITEM,item});
+
+}
+function deleteItem(item){
+    return dispatch=>dispatch({type:userConstants.DELETE_CART_ITEM,item});
+}
+function deleteAll(){
+      return dispatch=>dispatch({type:userConstants.DELETE_ALL_ITEM});
+}
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
     return dispatch => {
