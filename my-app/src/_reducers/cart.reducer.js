@@ -7,15 +7,15 @@ import { userConstants } from '../_constants/user.constant.js';
 const initialState = {
     orders: []
 };
-export function cart(state = initialState, action) {
+export function cart(state=initialState, action) {
   switch (action.type) {
-    case userConstants.ADD_CART_ITEM:{
+    case userConstants.ADD_CART:{
     console.log("Item added");
     return Object.assign({}, state, {
               orders: [...state.orders, action.item]
           });
     }
-    case userConstants.DELETE_CART_ITEM:{
+    case userConstants.DELETE_CART:{
     const newOrders = state.orders.filter((item) => item.sname !== action.item.sname);
         return {...state, orders: newOrders }
     }
@@ -23,7 +23,7 @@ export function cart(state = initialState, action) {
       return {};
   default:
     {
-
+      console.log("Initial State");
       return state;
     }
   }

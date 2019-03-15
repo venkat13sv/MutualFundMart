@@ -8,17 +8,16 @@ import SearchItem from '../MainPage/SearchItem';
 class Confirm extends Component {
   constructor(props) {
     super(props);
-    const {id} = props.match.params;
-     let items=JSON.parse(localStorage.schemes);
+  //  const {id} = props.match.params;
+  //   let items=JSON.parse(localStorage.schemes);
     if(!this.props.user)
      window.location=("/");
     this.submit = this.submit.bind(this);
 
     this.state={
-      item:items[id],
+
       isEmpty:false,
-      submitted:false,
-      id:id
+      submitted:false
     };
   }
   logOutHandler=(e)=>{
@@ -33,9 +32,60 @@ class Confirm extends Component {
 
 //  if (response.ok) console.log("Purchase Complete!")
   }
+  cartContents(){
+    const hcontent=[];
+    const cart =this.props.cart.orders;
+    console.log("cart"+ JSON.stringify(cart));
+    for(let i=0;i<cart.length;i++)
+    {
+      hcontent.push(
+        <tr>
+          <td data-th="Product">
+            <div className="row">
+              <div className="col-sm-2 hidden-xs">
+                <img
+                  src="http://placehold.it/100x100"
+                  alt="..."
+                  className="img-responsive"
+                />
+              </div>
+              <div className="col-sm-10">
+                <h4 className="nomargin">{cart[i].sname}</h4>
+                <p>
+              {cart[i].description}
+                </p>
+              </div>
+            </div>
+          </td>
+          <td data-th="Price">₹ {cart[i].iamount}</td>
+          <td data-th="Quantity">
+            <input
+              type="number"
+              className="form-control text-center"
+              defaultValue={1}
+            />
+          </td>
+          <td data-th="Subtotal" className="text-center">
+
+          </td>
+          <td className="actions" data-th>
+            <button className="btn btn-info btn-sm">
+              <i className="fa fa-refresh" />
+            </button>
+            <button className="btn btn-danger btn-sm">
+              <i className="fa fa-trash-o" />
+            </button>
+          </td>
+        </tr>
+      );
+
+    }
+    return hcontent;
+  }
 
   render() {
       const { user } = this.props;
+
     return (
       <div>
       <div className="header">
@@ -104,44 +154,7 @@ class Confirm extends Component {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td data-th="Product">
-              <div className="row">
-                <div className="col-sm-2 hidden-xs">
-                  <img
-                    src="http://placehold.it/100x100"
-                    alt="..."
-                    className="img-responsive"
-                  />
-                </div>
-                <div className="col-sm-10">
-                  <h4 className="nomargin">{this.state.item.sname}</h4>
-                  <p>
-                  {this.state.item.description}
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td data-th="Price">₹{this.state.item.iamount}</td>
-            <td data-th="Quantity">
-              <input
-                type="number"
-                className="form-control text-center"
-                defaultValue={1}
-              />
-            </td>
-            <td data-th="Subtotal" className="text-center">
-            {this.state.item.iamount}
-            </td>
-            <td className="actions" data-th>
-              <button className="btn btn-info btn-sm">
-                <i className="fa fa-refresh" />
-              </button>
-              <button className="btn btn-danger btn-sm">
-                <i className="fa fa-trash-o" />
-              </button>
-            </td>
-          </tr>
+        {this.cartContents()}
         </tbody>
         <tfoot>
           <tr className="visible-xs">
@@ -178,10 +191,10 @@ class Confirm extends Component {
 }
 
 function mapStateToProps(state) {
-    const {  authentication } = state;
+    const {  authentication,cart } = state;
     const { user } = authentication;
     return {
-        user
+        user,cart
     };
 }
 

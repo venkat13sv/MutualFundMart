@@ -24,11 +24,12 @@ class CardView extends React.Component {
          id:id
        };
 
-       console.log("State: "+ this.state.item.sname);
+       
 
      }
      handleClick() {
-       userActions.addItem(this.state.item);
+       const { dispatch }=this.props;
+       dispatch(userActions.addItem(this.state.item));
        console.log(JSON.stringify(this.props.cart));
      }
 
@@ -39,6 +40,8 @@ class CardView extends React.Component {
 
     render() {
       const { user } = this.props;
+      const {cart }= this.props;
+      console.log("Cart"+ JSON.stringify(cart));
         return (
          <div>
          <div className="header">

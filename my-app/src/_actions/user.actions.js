@@ -82,15 +82,24 @@ function getAll() {
 }
 
 function addItem(item){
-  localStorage.setItem('cart',item);
-  return dispatch=>dispatch({type:userConstants.ADD_CART_ITEM,item});
+
+  //localStorage.setItem('cart',item);
+  console.log("User action");
+  return dispatch =>
+  {
+    console.log("Inside Dispatch 0");
+    dispatch({type:userConstants.ADD_CART, item});
+    history.push('/confirm/2');
+  };
+
+
 
 }
 function deleteItem(item){
-    return dispatch=>dispatch({type:userConstants.DELETE_CART_ITEM,item});
+    return dispatch=>dispatch({type:userConstants.DELETE_CART,item});
 }
 function deleteAll(){
-      return dispatch=>dispatch({type:userConstants.DELETE_ALL_ITEM});
+      return dispatch=>dispatch({type:userConstants.DELETE_ALL});
 }
 // prefixed function name with underscore because delete is a reserved word in javascript
 function _delete(id) {
