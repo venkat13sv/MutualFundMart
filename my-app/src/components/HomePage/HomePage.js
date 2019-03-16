@@ -20,6 +20,9 @@ class HomePage extends React.Component {
   }
     render() {
       const { user } = this.props;
+    const count=this.props.cart.orders.length;
+    console.log("Cart "+ this.props.cart.orders.length);
+
         return (
          <div>
          <div className="header">
@@ -37,7 +40,9 @@ class HomePage extends React.Component {
 		<div className="w3layouts_header_left">
     <ul>
         <li><a href="#"><i className="fa fa-user" aria-hidden="true"></i> Welcome {user.firstName}</a></li>
-        <li><i className="fa fa-shopping-cart" aria-hidden="true"></i></li>
+        <li><Link to="/confirm" ><i className="fa fa-shopping-cart" aria-hidden="true"><span className='badge badge-warning' id='lblCartCount'> {count} </span></i>
+        </Link>
+        </li>
         <li><a href="#" onClick={e=>this.logOutHandler(e)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Out</a></li>
       </ul>
 		</div>
@@ -82,10 +87,10 @@ class HomePage extends React.Component {
        }
 }
 function mapStateToProps(state) {
-    const {  authentication } = state;
+    const {  authentication,cart } = state;
     const { user } = authentication;
     return {
-        user
+        user,cart
     };
 }
 

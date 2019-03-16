@@ -32,6 +32,8 @@ function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
     localStorage.removeItem('schemes');
+    localStorage.removeItem('stateData');
+    localStorage.removeItem('cart')
 
 }
 

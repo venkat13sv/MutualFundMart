@@ -29,7 +29,7 @@ const Root=()=>(
                            <Route exact path="/admin" component={Admin}/>
                            <Route exact path="/schemes/:id" component={CardView}/>
                            <Route exact path="/checkoutform" component={CheckoutForm}/>
-                           <Route exact path="/confirm/:id" component={Confirm}/>
+                           <Route exact path="/confirm" component={Confirm}/>
 
 
                        </Switch>

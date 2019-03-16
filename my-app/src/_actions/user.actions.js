@@ -89,14 +89,15 @@ function addItem(item){
   {
     console.log("Inside Dispatch 0");
     dispatch({type:userConstants.ADD_CART, item});
-    history.push('/confirm/2');
+    history.push('/confirm');
   };
 
 
 
 }
-function deleteItem(item){
-    return dispatch=>dispatch({type:userConstants.DELETE_CART,item});
+function deleteItem(id){
+
+  return dispatch=>dispatch({type:userConstants.DELETE_CART,id});
 }
 function deleteAll(){
       return dispatch=>dispatch({type:userConstants.DELETE_ALL});

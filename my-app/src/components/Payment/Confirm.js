@@ -13,6 +13,7 @@ class Confirm extends Component {
     if(!this.props.user)
      window.location=("/");
     this.submit = this.submit.bind(this);
+    this.handleDelete=this.handleDelete.bind(this);
 
     this.state={
 
@@ -23,6 +24,10 @@ class Confirm extends Component {
   logOutHandler=(e)=>{
     this.props.dispatch(userActions.logout);
      window.location=("/");
+  }
+  handleDelete(e,id){
+
+    this.props.dispatch(userActions.deleteItem(id));
   }
 
   async submit(ev) {
@@ -72,7 +77,7 @@ class Confirm extends Component {
             <button className="btn btn-info btn-sm">
               <i className="fa fa-refresh" />
             </button>
-            <button className="btn btn-danger btn-sm">
+            <button className="btn btn-danger btn-sm" schemeID={cart[i]._id} onClick={(e)=>this.handleDelete(e,cart[i]._id)}>
               <i className="fa fa-trash-o" />
             </button>
           </td>
@@ -103,7 +108,10 @@ class Confirm extends Component {
  <div className="w3layouts_header_left">
  <ul>
      <li><a href="#"><i className="fa fa-user" aria-hidden="true"></i> Welcome {user.firstName}</a></li>
-     <li><i className="fa fa-shopping-cart" aria-hidden="true"></i></li>
+     <li>
+     <Link to="/confirm" ><i className="fa fa-shopping-cart" aria-hidden="true"><span className='badge badge-warning' id='lblCartCount'> {this.props.cart.orders.length} </span></i>
+     </Link>
+     </li>
      <li><a href="#" onClick={e=>this.logOutHandler(e)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Out</a></li>
    </ul>
  </div>
@@ -164,9 +172,10 @@ class Confirm extends Component {
           </tr>
           <tr>
             <td>
-              <a href="#" className="btn btn-warning">
+            <Link to="/home">  <button className="btn btn-warning">
                 <i className="fa fa-angle-left" /> Continue Shopping
-              </a>
+              </button>
+              </Link>
             </td>
             <td colSpan={2} className="hidden-xs" />
             <td className="hidden-xs text-center">
