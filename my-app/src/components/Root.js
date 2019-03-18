@@ -12,7 +12,7 @@ import ContactUs from './MainPage/ContactUs.js';
 import { Admin }  from '../Admin/Admin.js';
 import { AdminPanel } from '../Admin/AdminPanel.js';
 import {CardView} from '../components/HomePage/CardView.js';
-import  CheckoutForm  from '../components/Payment/Payment.js';
+import  {CheckoutForm}  from '../components/Payment/Payment.js';
 import { Confirm } from '../components/Payment/Confirm.js';
 
 const Root=()=>(

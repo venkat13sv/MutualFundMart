@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 
 class CheckoutForm extends Component {
@@ -10,14 +11,17 @@ class CheckoutForm extends Component {
   async submit(ev) {
     // User clicked submit
 
-
+console.log(JSON.stringify(this.props.cart));
 
 //  if (response.ok) console.log("Purchase Complete!")
   }
 
   render() {
+    const total=localStorage.getItem('total');
     return (
-      <div style={{"width":"800px", "margin":"0 auto"}}>
+      <div style={{"width":"800px","paddingTop":"100px","paddingLeft":"500px"}}>
+      <h1 style={{"paddingLeft":"15px","paddingBottom":"30px"}}>Payment Page</h1>
+
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-4">
@@ -94,20 +98,16 @@ class CheckoutForm extends Component {
               <li className="active">
                 <a href="#">
                   <span className="badge pull-right">
-                    <span className="glyphicon glyphicon-usd" />4200
+                    <span className="glyphicon glyphicon-usd" />{total}
                   </span>{" "}
                   Final Payment
                 </a>
               </li>
             </ul>
             <br />
-            <a
-              href="http://www.jquery2dotnet.com"
-              className="btn btn-success btn-lg btn-block"
-              role="button"
-            >
-              Pay
-            </a>
+
+          <button className="btn btn-success btn-lg btn-block" onClick={this.submit}>    Pay</button>
+
           </div>
         </div>
       </div>
@@ -117,4 +117,14 @@ class CheckoutForm extends Component {
   }
 }
 
-export default CheckoutForm;
+
+function mapStateToProps(state) {
+    const {  authentication,cart } = state;
+    const { user } = authentication;
+    return {
+        user,cart
+    };
+}
+
+const connectedCheckOut = connect(mapStateToProps)(CheckoutForm);
+export { connectedCheckOut as CheckoutForm };

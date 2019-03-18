@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require('_helpers/db');
 const User = db.User;
+const MyScheme = db.MyScheme;
 const mail=require('../_helpers/verification');
 const crypto=require('crypto');
 
@@ -12,7 +13,8 @@ module.exports = {
     getById,
     create,
     update,
-    delete: _delete
+    delete: _delete,
+    buyFund
 };
 
 async function authenticate({ username, password }) {
@@ -37,6 +39,14 @@ async function authenticate({ username, password }) {
 
 async function getAll() {
     return await User.find().select('-hash');
+}
+async function buyFund(scheme,mailId) {
+  const myscheme=new MyScheme(scheme);
+  await myscheme.save();
+  console.log("Scheme Added");
+  let response={"message":"Scheme Added successfully.Details sent to Registered EMail Address."}
+  return response;
+
 }
 
 async function getById(id) {

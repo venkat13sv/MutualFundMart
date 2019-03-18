@@ -6,6 +6,7 @@ import SearchItem from '../MainPage/SearchItem';
 
 
 class Confirm extends Component {
+
   constructor(props) {
     super(props);
   //  const {id} = props.match.params;
@@ -17,8 +18,9 @@ class Confirm extends Component {
 
     this.state={
 
-      isEmpty:false,
-      submitted:false
+      isEmpty:true,
+      submitted:false,
+      total:0
     };
   }
   logOutHandler=(e)=>{
@@ -40,9 +42,14 @@ class Confirm extends Component {
   cartContents(){
     const hcontent=[];
     const cart =this.props.cart.orders;
+    console.log("cart length:"+ cart.length);
+    if(cart.length==0)
+    this.setState({isEmpty:false,submitted:false});
+  
     console.log("cart"+ JSON.stringify(cart));
     for(let i=0;i<cart.length;i++)
     {
+
       hcontent.push(
         <tr>
           <td data-th="Product">
@@ -71,7 +78,7 @@ class Confirm extends Component {
             />
           </td>
           <td data-th="Subtotal" className="text-center">
-
+            ₹ {cart[i].iamount  }
           </td>
           <td className="actions" data-th>
             <button className="btn btn-info btn-sm">
@@ -85,11 +92,26 @@ class Confirm extends Component {
       );
 
     }
+
     return hcontent;
   }
+  getTotal(){
+      const cart =this.props.cart.orders;
+      let total=0;
+      for(let i=0;i<cart.length;i++)
+      {
+        total=total+ +cart[i].iamount;
+      }
+      total+=278;
+      localStorage.setItem('total',total+278);
+      return total;
+
+  }
+
 
   render() {
       const { user } = this.props;
+      let total=localStorage.getItem('total');
 
     return (
       <div>
@@ -143,12 +165,20 @@ class Confirm extends Component {
      </nav>
 
    </div>
- <SearchItem></SearchItem>
+
  </nav>
 
 
  </div>
-      <div className="container">
+    {!this.state.isEmpty&&<div className="alert alert-info" style={{"width":"300px","marginLeft":"500px","marginTop":"100px"}}>
+  <strong>Info!</strong> <b>Sorry! No items in Cart.</b>
+
+  <Link to="/home" >  <button className="btn btn-warning" style={{"marginTop":"10px"}} >
+      <i className="fa fa-angle-left" /> Continue Shopping
+    </button>
+    </Link>
+</div>}
+    { this.state.isEmpty && <div className="container">
       <table id="cart" className="table table-hover table-condensed">
         <thead>
           <tr>
@@ -179,20 +209,17 @@ class Confirm extends Component {
             </td>
             <td colSpan={2} className="hidden-xs" />
             <td className="hidden-xs text-center">
-              <strong>Total $150.00</strong>
+              <strong>  Total ₹ {this.getTotal() } (Including GST) </strong>
             </td>
             <td>
-              <a
-                href="https://www.paypal.com/webapps/hermes?token=5EY097812P7754247&useraction=commit&mfid=1546377013907_cf1dec6830d7"
-                className="btn btn-success btn-block"
-              >
-                Checkout <i className="fa fa-angle-right" />
-              </a>
+              <Link to="/checkoutform">
+                <button className="btn btn-success btn-block" >Checkout <i className="fa fa-angle-right" /></button>
+              </Link>
             </td>
           </tr>
         </tfoot>
       </table>
-    </div>
+    </div>}
     </div>
 
       );

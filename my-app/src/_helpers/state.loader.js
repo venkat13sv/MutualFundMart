@@ -16,8 +16,9 @@ export default class StateLoader {
     }
 
     saveState(state) {
-        console.log("Save state:" +JSON.stringify(state.cart));
+
         try {
+            //const { cart }=state;
             let serializedState = JSON.stringify(state);
             localStorage.setItem("stateData", serializedState);
 

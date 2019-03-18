@@ -10,8 +10,20 @@ const initialState = {
 export function cart(state=initialState, action) {
   switch (action.type) {
     case userConstants.ADD_CART:{
+    let isExists=false,cart=state.orders;
+    cart.map(cartItem =>{
+      if(cartItem._id==action.item._id)
+          {
+            isExists=true;
+
+          }
+
+    });
     
-    return Object.assign({}, state, {
+    if(isExists)
+      return state;
+    else
+      return Object.assign({}, state, {
               orders: [...state.orders, action.item]
           });
     }

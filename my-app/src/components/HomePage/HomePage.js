@@ -21,7 +21,7 @@ class HomePage extends React.Component {
     render() {
       const { user } = this.props;
     const count=this.props.cart.orders.length;
-    console.log("Cart "+ this.props.cart.orders.length);
+  //  console.log("Cart "+ this.props.cart.orders.length);
 
         return (
          <div>

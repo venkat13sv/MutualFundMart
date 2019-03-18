@@ -33,7 +33,7 @@ function logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('schemes');
     localStorage.removeItem('stateData');
-    localStorage.removeItem('cart')
+  
 
 }
 
