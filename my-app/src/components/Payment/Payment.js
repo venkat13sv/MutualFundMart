@@ -1,17 +1,37 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import  {userActions}   from '../../_actions/user.actions.js';
+import { Link } from 'react-router-dom';
 
 
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.submit = this.submit.bind(this);
+    this.handleChange=this.handleChange.bind(this);
+    this.state={
+      cardNumber:"",
+      expiryMM:"",
+      expiryYY:"",
+      cvv:"",
+      submitted:false,
+
+    };
+  }
+  handleChange(e) {
+      const { name, value } = e.target;
+      this.setState({ [name]: value });
   }
 
   async submit(ev) {
-    // User clicked submit
-
-console.log(JSON.stringify(this.props.cart));
+    this.setState({submitted:true});
+      const paymentData={
+        card:this.state,
+        user:this.props.user,
+        orders:this.props.cart.orders
+      };
+      this.props.dispatch(userActions.makePayment(paymentData));
+      console.log(JSON.stringify(paymentData));
 
 //  if (response.ok) console.log("Purchase Complete!")
   }
@@ -19,9 +39,15 @@ console.log(JSON.stringify(this.props.cart));
   render() {
     const total=localStorage.getItem('total');
     return (
+
       <div style={{"width":"800px","paddingTop":"100px","paddingLeft":"500px"}}>
       <h1 style={{"paddingLeft":"15px","paddingBottom":"30px"}}>Payment Page</h1>
-
+      {this.state.submitted&&this.props.alert.message}
+      {this.state.submitted&&<p>{this.props.alert.message}</p>&&  <Link to="/home">  <button className="btn btn-warning">
+            <i className="fa fa-angle-left" /> Back
+          </button>
+          </Link>}
+      { !this.state.submitted&&
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-4">
@@ -30,7 +56,7 @@ console.log(JSON.stringify(this.props.cart));
                 <h3 className="panel-title">Payment Details</h3>
                 <div className="checkbox pull-right">
                   <label>
-                    <input type="checkbox" />
+                    <input type="checkbox"  />
                     Remember
                   </label>
                 </div>
@@ -43,9 +69,11 @@ console.log(JSON.stringify(this.props.cart));
                       <input
                         type="text"
                         className="form-control"
-                        id="cardNumber"
+                        name="cardNumber"
+                        value={this.state.cardNumber}
+                        onChange={this.handleChange}
                         placeholder="Valid Card Number"
-                        required
+
                         autofocus
                       />
                       <span className="input-group-addon">
@@ -62,8 +90,10 @@ console.log(JSON.stringify(this.props.cart));
                           <input
                             type="text"
                             className="form-control"
-                            id="expityMonth"
+                            name="expiryMM"
                             placeholder="MM"
+                            value={this.state.expiryMM}
+                            onChange={this.handleChange}
                             required
                           />
                         </div>
@@ -71,7 +101,9 @@ console.log(JSON.stringify(this.props.cart));
                           <input
                             type="text"
                             className="form-control"
-                            id="expityYear"
+                            name="expiryYY"
+                            value={this.state.expiryYY}
+                            onChange={this.handleChange}
                             placeholder="YY"
                             required
                           />
@@ -84,7 +116,9 @@ console.log(JSON.stringify(this.props.cart));
                         <input
                           type="password"
                           className="form-control"
-                          id="cvCode"
+                          name="cvv"
+                          value={this.state.cvv}
+                          onChange={this.handleChange}
                           placeholder="CV"
                           required
                         />
@@ -107,10 +141,14 @@ console.log(JSON.stringify(this.props.cart));
             <br />
 
           <button className="btn btn-success btn-lg btn-block" onClick={this.submit}>    Pay</button>
+          <Link to="/confirm">  <button className="btn btn-warning badge">
+                <i className="fa fa-angle-left" /> Cancel
+              </button>
+              </Link>
 
           </div>
         </div>
-      </div>
+      </div>}
 </div>
 
       );
@@ -119,10 +157,10 @@ console.log(JSON.stringify(this.props.cart));
 
 
 function mapStateToProps(state) {
-    const {  authentication,cart } = state;
+    const {  authentication,cart,alert } = state;
     const { user } = authentication;
     return {
-        user,cart
+        user,cart,alert
     };
 }
 

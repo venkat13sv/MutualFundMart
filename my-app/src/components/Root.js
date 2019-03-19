@@ -14,6 +14,7 @@ import { AdminPanel } from '../Admin/AdminPanel.js';
 import {CardView} from '../components/HomePage/CardView.js';
 import  {CheckoutForm}  from '../components/Payment/Payment.js';
 import { Confirm } from '../components/Payment/Confirm.js';
+import {MySchemes} from '../components/HomePage/MySchemes.js';
 
 const Root=()=>(
 
@@ -30,6 +31,7 @@ const Root=()=>(
                            <Route exact path="/schemes/:id" component={CardView}/>
                            <Route exact path="/checkoutform" component={CheckoutForm}/>
                            <Route exact path="/confirm" component={Confirm}/>
+                           <Route exact path="/mySchemes" component={MySchemes}/>
 
 
                        </Switch>

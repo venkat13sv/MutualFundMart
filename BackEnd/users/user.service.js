@@ -40,11 +40,13 @@ async function authenticate({ username, password }) {
 async function getAll() {
     return await User.find().select('-hash');
 }
-async function buyFund(scheme,mailId) {
-  const myscheme=new MyScheme(scheme);
+async function buyFund(payload) {
+  console.log("Server Payment: "+ JSON.stringify(payload));
+  const myscheme=new MyScheme(payload.orders[0]);
+  myscheme.paymentDone=true;
   await myscheme.save();
   console.log("Scheme Added");
-  let response={"message":"Scheme Added successfully.Details sent to Registered EMail Address."}
+  let response={"message":"Payment successfully completed.Fund Details sent to Registered EMail Address."}
   return response;
 
 }

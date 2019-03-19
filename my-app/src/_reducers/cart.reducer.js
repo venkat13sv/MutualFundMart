@@ -19,7 +19,7 @@ export function cart(state=initialState, action) {
           }
 
     });
-    
+
     if(isExists)
       return state;
     else
@@ -32,7 +32,7 @@ export function cart(state=initialState, action) {
         return {...state, orders: newOrders }
     }
     case userConstants.DELETE_ALL:
-      return {};
+      return {orders:[]};
   default:
     {
       console.log("Initial State");

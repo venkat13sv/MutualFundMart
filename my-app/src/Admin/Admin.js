@@ -50,6 +50,7 @@ class Admin extends React.Component {
 
                                             <div className="signin-form profile">
                                             <h3 className="agileinfo_sign">Admin Login</h3>
+                                            {submitted&&alert.type=="alert-danger"&& <p style={{color:"red"}}>{alert.message}</p>}
                                                 <div className="login-form">
                                                   <form action="#" method="post" onSubmit={this.handleSubmit}>
 
@@ -73,6 +74,7 @@ class Admin extends React.Component {
       }
 }
 function mapStateToProps(state) {
+  const {alert}=state;
   const { loggingIn } = state.adminReducers;
   return {
   loggingIn

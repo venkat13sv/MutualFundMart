@@ -4,44 +4,25 @@ import { Link } from 'react-router-dom';
 import SearchItem from '../MainPage/SearchItem';
 import { history } from '../../_helpers/history.js';
 import  {userActions}   from '../../_actions/user.actions.js';
-import {  Schemes } from './Schemes.js';
+import {  Schemes2 } from './Schemes2.js';
 
-
-class CardView extends React.Component {
+class MySchemes extends React.Component {
 
   constructor(props) {
        super(props);
-       const {id} = props.match.params;
-
-       let items=JSON.parse(localStorage.schemes);
-       if(!this.props.user)
-        window.location=("/");
-       this.handleClick = this.handleClick.bind(this);
-       this.state={
-         item:items[id],
-         isEmpty:false,
-         submitted:false,
-         id:id
-       };
-
-
+      if(!this.props.user)
+       window.location=("/")
 
      }
-     handleClick() {
-       const { dispatch }=this.props;
-       dispatch(userActions.addItem(this.state.item));
-       //console.log(JSON.stringify(this.props.cart));
-     }
-
   logOutHandler=(e)=>{
     this.props.dispatch(userActions.logout);
      window.location=("/");
   }
-
     render() {
       const { user } = this.props;
-      const {cart }= this.props;
-      console.log("Cart"+ JSON.stringify(cart));
+    const count=this.props.cart.orders.length;
+  //  console.log("Cart "+ this.props.cart.orders.length);
+
         return (
          <div>
          <div className="header">
@@ -59,7 +40,9 @@ class CardView extends React.Component {
 		<div className="w3layouts_header_left">
     <ul>
         <li><a href="#"><i className="fa fa-user" aria-hidden="true"></i> Welcome {user.firstName}</a></li>
-        <li><i className="fa fa-shopping-cart" aria-hidden="true"></i></li>
+        <li><Link to="/confirm" ><i className="fa fa-shopping-cart" aria-hidden="true"><span className='badge badge-warning' id='lblCartCount'> {count} </span></i>
+        </Link>
+        </li>
         <li><a href="#" onClick={e=>this.logOutHandler(e)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Out</a></li>
       </ul>
 		</div>
@@ -91,27 +74,13 @@ class CardView extends React.Component {
 				</nav>
 
 			</div>
-		<SearchItem></SearchItem>
+
 		</nav>
 
 
 		</div>
-    <div  style={{ "marginTop": "100px","marginLeft": "100px","width": "800px","height":"800px"}}>
-    <table>
-      <tbody>
-
-        <tr><td><h1 className="fundName">{this.state.item.sname}</h1></td></tr>
-        <tr><td><h6 className="fundName">Fund Details</h6></td></tr>
-        <tr><td>{this.state.item.cname}</td></tr>
-        <tr><td>{this.state.item.iamount}</td></tr>
-        <tr><td>{this.state.item.description}</td></tr>
-       <button type="button" class="btn btn-success" onClick={this.handleClick} style={{"float":"right"}}>Invest Now</button>
-        <div>
-
-
-        </div>
-      </tbody>
-    </table>
+    <div>
+    <Schemes2></Schemes2>
     </div>
 </div>
 );
@@ -125,5 +94,5 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedView = connect(mapStateToProps)(CardView);
-export { connectedView as CardView };
+const connectedHomePage = connect(mapStateToProps)( MySchemes );
+export { connectedHomePage as  MySchemes  };

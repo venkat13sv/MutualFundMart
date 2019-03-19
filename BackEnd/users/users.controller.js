@@ -10,7 +10,7 @@ router.get('/current', getCurrent);
 router.get('/:id', getById);
 router.put('/:id', update);
 router.delete('/:id', _delete);
-router.post('/buy',buyFund);
+router.post('/payment',payment);
 
 module.exports = router;
 console.log("Include user service Ok");
@@ -26,8 +26,8 @@ function register(req, res, next) {
         .then(() => res.json({}))
         .catch(err => next(err));
 }
-function buyFund(req, res, next) {
-    userService.buyFund()
+function payment(req, res, next) {
+    userService.buyFund(req.body)
         .then(message => res.json(message))
         .catch(err => next(err));
 }

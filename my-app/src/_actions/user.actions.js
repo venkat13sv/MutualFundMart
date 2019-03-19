@@ -11,6 +11,7 @@ export const userActions = {
     addItem,
     deleteItem,
     deleteAll,
+    makePayment,
     delete: _delete
 };
 
@@ -63,6 +64,19 @@ function register(user) {
     function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
     function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
     function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
+}
+
+function makePayment(paymentData){
+    return dispatch =>{
+           dispatch(alertActions.request("Processing your Payment"));
+           userService.pay(paymentData).then(
+             msg=> {
+               dispatch(alertActions.success(msg.message));
+               dispatch(deleteAll());
+             },
+             error=> dispatch(alertActions.error(error))
+           );
+    };
 }
 
 function getAll() {

@@ -8,6 +8,7 @@ export const userService = {
     getAll,
     getById,
     update,
+    pay,
     delete: _delete
 };
 
@@ -33,7 +34,18 @@ function logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('schemes');
     localStorage.removeItem('stateData');
-  
+
+
+}
+function pay(payload){
+  const requestOptions = {
+      method: 'POST',
+
+      headers: {...authHeader(),'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+  };
+
+  return fetch(`http://localhost:4000/users/payment`, requestOptions).then(handleResponse);
 
 }
 
