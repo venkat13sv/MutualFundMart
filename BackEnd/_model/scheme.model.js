@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const schema = new Schema({
     sname: { type: String, unique: true, required: true },
     cname: { type: String, required: true },

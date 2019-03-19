@@ -10,6 +10,7 @@ class CheckoutForm extends Component {
     this.submit = this.submit.bind(this);
     this.handleChange=this.handleChange.bind(this);
     this.state={
+      cardName:"",
       cardNumber:"",
       expiryMM:"",
       expiryYY:"",

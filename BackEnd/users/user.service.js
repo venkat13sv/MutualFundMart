@@ -5,6 +5,7 @@ const db = require('_helpers/db');
 const User = db.User;
 const MyScheme = db.MyScheme;
 const mail=require('../_helpers/verification');
+const mail2=require('../_helpers/order.mail');
 const crypto=require('crypto');
 
 module.exports = {
@@ -43,8 +44,12 @@ async function getAll() {
 async function buyFund(payload) {
   console.log("Server Payment: "+ JSON.stringify(payload));
   const myscheme=new MyScheme(payload.orders[0]);
+  myscheme.userId=payload.user._id;
+  myscheme.email=payload.user.email;
   myscheme.paymentDone=true;
   await myscheme.save();
+  let msg=payload.orders;
+  mail2.sendVerificationMail(payload.user.email,payload.user.firstName,msg);
   console.log("Scheme Added");
   let response={"message":"Payment successfully completed.Fund Details sent to Registered EMail Address."}
   return response;
@@ -66,7 +71,7 @@ async function create(userParam) {
 
     user.username=userParam.email;
 
-  var token = crypto.randomBytes(64).toString('hex')
+  var token = crypto.randomBytes(64).toString('hex');
   mail.sendVerificationMail(userParam.email,userParam.firstName,token);
   user.token=token;
   //console.log("token" + token +" user" + JSON.stringify(userParam));

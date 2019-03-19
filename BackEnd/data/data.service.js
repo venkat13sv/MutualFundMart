@@ -10,6 +10,8 @@ async function getAllSchemes() {
     return await Scheme.find({});
 }
 
-async function getAllSchemes() {
-    return await MyScheme.find({});
+async function getAllMySchemes(user) {
+    console.log("Email"+ JSON.stringify(user));
+    return await MyScheme.find({"email":user.email});
+
 }

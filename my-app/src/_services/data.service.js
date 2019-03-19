@@ -20,11 +20,13 @@ function getAllSchemes() {
       }
     );
 }
-function getAllMySchemes() {
+function getAllMySchemes(user) {
     const requestOptions = {
-        method: 'GET',
-        headers: authHeader()
+        method: 'POST',
+        headers: {...authHeader(),'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
     };
+    console.log("request"+JSON.stringify(requestOptions));
 
     return fetch(`http://localhost:4000/api/myschemes`, requestOptions).then(handleResponse).then(
       data=> {

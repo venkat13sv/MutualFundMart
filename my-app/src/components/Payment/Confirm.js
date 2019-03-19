@@ -45,7 +45,7 @@ class Confirm extends Component {
     console.log("cart length:"+ cart.length);
     if(cart.length==0)
     this.setState({isEmpty:false,submitted:false});
-  
+
     console.log("cart"+ JSON.stringify(cart));
     for(let i=0;i<cart.length;i++)
     {
@@ -71,11 +71,7 @@ class Confirm extends Component {
           </td>
           <td data-th="Price">₹ {cart[i].iamount}</td>
           <td data-th="Quantity">
-            <input
-              type="number"
-              className="form-control text-center"
-              defaultValue={1}
-            />
+          
           </td>
           <td data-th="Subtotal" className="text-center">
             ₹ {cart[i].iamount  }
@@ -103,7 +99,7 @@ class Confirm extends Component {
         total=total+ +cart[i].iamount;
       }
       total+=278;
-      localStorage.setItem('total',total+278);
+      localStorage.setItem('total',total);
       return total;
 
   }
@@ -184,7 +180,7 @@ class Confirm extends Component {
           <tr>
             <th style={{ width: "50%" }}>Fund</th>
             <th style={{ width: "10%" }}>Monthly SIP</th>
-            <th style={{ width: "8%" }}>No of terms</th>
+            <th style={{ width: "8%" }}></th>
             <th style={{ width: "22%" }} className="text-center">
               Subtotal
             </th>

@@ -16,7 +16,7 @@ class Schemes2 extends React.Component {
        }
   }
   componentDidMount(){
-    dataService.getAllMySchemes().then(
+    dataService.getAllMySchemes(this.props.user).then(
     items=>{
       this.setState({items: items , isEmpty: true });
         console.log("this state" + JSON.stringify(this.state));
@@ -52,12 +52,12 @@ class Schemes2 extends React.Component {
       if(leftItems)
       {
         let i=count;
-        if(items1.length-count==2)
+        if(items1.length-count==2||items1.length-count==1)
         {
           hcontent.push(
           <tr id={"Row"+i}>
             <td> <Link to={"/schemes/"+i}> <Card style={{"float":"left"}}  schemeId={items1[i]._id}  title={items1[i].sname} item={items1[i]}></Card></Link></td>
-            {i<items1.length&&  <td> <Link to={"/schemes/"+(i+1)}> <Card style={{"float":"left"}}  schemeId={items1[i+1]._id}  title={items1[i+1].sname} item={items1[i+1]}></Card></Link></td>}
+            {i<items1.length-1&&  <td> <Link to={"/schemes/"+(i+1)}> <Card style={{"float":"left"}}  schemeId={items1[i+1]._id}  title={items1[i+1].sname} item={items1[i+1]}></Card></Link></td>}
             </tr>
 
 
@@ -65,26 +65,31 @@ class Schemes2 extends React.Component {
         );
         }
 
+
       }
+      console.log("len"+items1.length);
+      console.log(hcontent)
+      if(items1.length==0){
+      hcontent.push(<div>
+        <h3>No Mutual Funds found</h3>
+        <Link to="/home">  <button className="btn btn-warning">
+            <i className="fa fa-angle-left" /> Back to Home
+          </button>
+          </Link>
+        </div>);
       return hcontent;
+      }
+      else
+        return hcontent;
     }
     }
   render()
   {
-
-
-
-
-
-
-      return (
-
-         <div>
-         <div className="banner1" style={{'background':'url('+'../images/categories.jpg'+')'}}></div>
-         <h3 className="w3l_header w3_agileits_heade">List of all Mutual Funds Categories</h3>
-        <div style={{ "marginTop": "100px","marginLeft": "100px"}}> <table><tbody>{this.state.isEmpty&&this.itemsContent()}</tbody></table></div>
-
-         </div>
+    return (
+        <div>
+          <h3 className="w3l_header w3_agileits_heade">My MutualFunds</h3>
+          <div style={{ "marginTop": "100px","marginLeft": "100px"}}> <table><tbody>{this.itemsContent()}</tbody></table></div>
+        </div>
 
          );
   }

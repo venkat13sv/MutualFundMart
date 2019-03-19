@@ -64,8 +64,8 @@ class MySchemes extends React.Component {
 			<div className="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
 				<nav className="link-effect-2" id="link-effect-2">
 					<ul className="nav navbar-nav">
-            <li className="active"><a href="#"><span data-hover="Categories and Schemes">Categories and Schemes</span></a></li>
-						<li ><a href="#"><span data-hover="My Schemes">My Schemes</span></a></li>
+            <li ><a href="#"><span data-hover="Categories and Schemes">Categories and Schemes</span></a></li>
+						<li className="active"><a href="#"><span data-hover="My Schemes">My Schemes</span></a></li>
 						<li><a href="#"><span data-hover="Profile">Profile</span></a></li>
 						<li><a href="#"><span data-hover="Events"></span></a></li>
 

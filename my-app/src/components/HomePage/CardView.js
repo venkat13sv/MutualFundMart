@@ -39,6 +39,7 @@ class CardView extends React.Component {
   }
 
     render() {
+      const count=this.props.cart.orders.length;
       const { user } = this.props;
       const {cart }= this.props;
       console.log("Cart"+ JSON.stringify(cart));
@@ -59,7 +60,7 @@ class CardView extends React.Component {
 		<div className="w3layouts_header_left">
     <ul>
         <li><a href="#"><i className="fa fa-user" aria-hidden="true"></i> Welcome {user.firstName}</a></li>
-        <li><i className="fa fa-shopping-cart" aria-hidden="true"></i></li>
+        <li><i className="fa fa-shopping-cart" aria-hidden="true"><span className='badge badge-warning' id='lblCartCount'> {count} </span></i></li>
         <li><a href="#" onClick={e=>this.logOutHandler(e)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Out</a></li>
       </ul>
 		</div>
