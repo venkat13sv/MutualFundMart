@@ -7,5 +7,6 @@ module.exports = {
     User: require('../users/user.model'),
     Admin: require('../admin/admin.model'),
     Scheme: require('../_model/scheme.model'),
-    MyScheme: require('../_model/myschemes.model')
+    MyScheme: require('../_model/myschemes.model'),
+    FeedBack: require('../_model/feedback.model')
 };

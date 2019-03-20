@@ -15,6 +15,7 @@ function jwt() {
             '/users/register',
             '/admin/authenticate',
             '/api/schemes',
+            '/api/feedback',
             '/verify'
 
 

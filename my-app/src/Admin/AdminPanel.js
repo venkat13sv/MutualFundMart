@@ -62,22 +62,57 @@ render() {
   return (
 
   <div>
-  <nav className="navbar navbar-inverse">
-    <div className="container-fluid">
-      <div className="navbar-header">
-        <a className="navbar-brand" href="#" style={{"color":"#ffffffd4"}}>Funding Admin Panel</a>
-      </div>
-      <ul className="nav navbar-nav">
-        <li className="active"><a href="#">Home</a></li>
-        <li><a href="#">All</a></li>
-        <li><a href="#"></a></li>
-      </ul>
-      <ul className="nav navbar-nav navbar-right">
-        <li><a href="#"><span className="glyphicon glyphicon-user"></span>{admin.aname}</a></li>
-        <li><a href="#" onClick={e=>this.logOutHandler(e)}><span className="glyphicon glyphicon-log-in"></span> Logout</a></li>
-      </ul>
+  <div className="header">
+
+<div className="w3layouts_header_right">
+<div className="agileits-social top_content">
+   <ul className="nav navbar-nav">
+    <li> <h1><a className="navbar-brand" href="index.html"><span>F</span>unding</a></h1></li>
+       <li>  <a className="navbar-brand" href="#" style={{"color":"#ffffffd4"}}>Admin Panel</a></li>
+
+     </ul>
+ </div>
+</div>
+<div className="w3layouts_header_left">
+<ul>
+ <li><a href="#"><i className="fa fa-user" aria-hidden="true"></i> Welcome {admin.aname}</a></li>
+ <li>
+ </li>
+ <li><a href="#" onClick={e=>this.logOutHandler(e)}><i className="fa fa-pencil-square-o" aria-hidden="true"></i> Log Out</a></li>
+</ul>
+</div>
+<div className="clearfix"> </div>
+</div>
+<div className="banner">
+  <nav className="navbar navbar-default">
+    <div className="navbar-header navbar-left">
+      <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span className="sr-only">Toggle navigation</span>
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>
+        <span className="icon-bar"></span>
+      </button>
+
     </div>
+
+    <div className="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+      <nav className="link-effect-2" id="link-effect-2">
+        <ul className="nav navbar-nav">
+          <li className="active"><a href="#"><span data-hover="Categories and Schemes">Add scheme</span></a></li>
+          <li ><Link to="/mySchemes"><span data-hover="My Schemes">All</span></Link></li>
+          <li><a href="#"><span data-hover="Profile">All</span></a></li>
+          <li><a href="#"><span data-hover="Events"></span></a></li>
+
+          <li><a href="#"><span data-hover="FeedBack">FeedBack</span></a></li>
+        </ul>
+      </nav>
+
+    </div>
+
   </nav>
+
+
+  </div>
 
 
 <div>

@@ -2,7 +2,8 @@ import { authHeader } from '../_helpers/auth-header.js';
 export const dataService = {
 
     getAllSchemes,
-    getAllMySchemes
+    getAllMySchemes,
+    sendFeedBack
 };
 function getAllSchemes() {
     const requestOptions = {
@@ -29,6 +30,25 @@ function getAllMySchemes(user) {
     console.log("request"+JSON.stringify(requestOptions));
 
     return fetch(`http://localhost:4000/api/myschemes`, requestOptions).then(handleResponse).then(
+      data=> {
+        console.log("Schemes " + JSON.stringify(data ));
+        localStorage.setItem('schemes', JSON.stringify(data));
+        return data;
+      },
+      error=>{
+        console.log("Err "+ error);
+      }
+    );
+}
+function sendFeedBack(feedback) {
+    const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json' },
+        body: JSON.stringify(feedback)
+    };
+    console.log("request"+JSON.stringify(requestOptions));
+
+    return fetch(`http://localhost:4000/api/feedback`, requestOptions).then(handleResponse).then(
       data=> {
         console.log("Schemes " + JSON.stringify(data ));
         localStorage.setItem('schemes', JSON.stringify(data));

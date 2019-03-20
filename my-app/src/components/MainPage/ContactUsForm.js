@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import  {userActions}   from '../../_actions/user.actions.js';
+import {dataService} from '../../_services/data.service.js';
 class ContactUsForm extends React.Component {
   constructor(props) {
        super(props);
@@ -10,8 +11,10 @@ class ContactUsForm extends React.Component {
            name: '',
            email: '',
            subject:'',
+           type:'FeedBack',
            message:'',
-           submitted: false
+           submitted: false,
+           displayMessage:''
        };
 
        this.handleChange = this.handleChange.bind(this);
@@ -26,42 +29,65 @@ class ContactUsForm extends React.Component {
    handleSubmit(e) {
        e.preventDefault();
 
-       this.setState({ submitted: true });
-       const { username, password } = this.state;
-       const { dispatch } = this.props;
-       if (username && password) {
-           dispatch(userActions.login(username, password));
+       this.setState({ submitted: true,displayMessage:"Submitting your message" });
+       let {submitted,displayMessage,...feed}=this.state;
+       console.log(JSON.stringify(feed));
+       dataService.sendFeedBack(feed).then(
+         message=>{this.setState({"displayMessage":message})}
+       );
 
-       }
+
    }
     render() {
-      const { loggingIn } = this.props;
-      const { name,email,subject,message } = this.state;
+      const { user } = this.props;
+      console.log("State:"+ user)
+      
+      const { name,email,type,subject,message } = this.state;
         return (
           <div className="agile_team_grids_top">
   				<div className="col-md-6 agileinfo_mail_grid_left">
-  					<form action="#" method="post" onSubmit={this.handleSubmit}>
-  						<span className="input input--nariko">
-  							<input className="input__field input__field--nariko" name="name" value={name} type="text" id="input-20" placeholder="Your Name" onChange={this.handleChange} required="" />
-  							<label className="input__label input__label--nariko" for="input-20">
-  								<span className="input__label-content input__label-content--nariko">Your Name</span>
-  							</label>
-  						</span>
-  						<span className="input input--nariko">
-  							<input className="input__field input__field--nariko" name="email" value={email} type="email" id="input-21" placeholder=" " onChange={this.handleChange} required="" />
-  							<label className="input__label input__label--nariko" for="input-21" >
-  								<span className="input__label-content input__label-content--nariko">Your Email</span>
-  							</label>
-  						</span>
-  						<span className="input input--nariko">
-  							<input className="input__field input__field--nariko" name="subject" value={subject} type="text" id="input-22" placeholder=" " onChange={this.handleChange} required="" />
-  							<label className="input__label input__label--nariko" for="input-22">
-  								<span className="input__label-content input__label-content--nariko">Your Subject</span>
-  							</label>
-  						</span>
-  						<textarea name="message" placeholder="Your Message..." value={message} onChange={this.handleChange} required=""></textarea>
-  						<input type="submit" />
-  					</form>
+          <form className="form-horizontal" onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <label className="control-label col-sm-3" htmlFor="email">Name:</label>
+              <div className="col-xl-5">
+                <input type="text" className="form-control" id="name" placeholder="Your Name" name="name" value={name} onChange={this.handleChange} />
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="control-label col-sm-3" htmlFor="email">Email:</label>
+              <div className="col-xl-5">
+                <input type="text" className="form-control" id="cname" placeholder="Your Email" name="email" value={email} onChange={this.handleChange} />
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="control-label col-sm-3" htmlFor="sel1">Category:</label>
+                <div className="col-xl-5">
+                <select className="form-control" name="type" value={type} onChange={this.handleChange} id="sel1">
+                  <option>FeedBack</option>
+                  <option>Query</option>
+
+                </select>
+                </div>
+            </div>
+            <div className="form-group">
+              <label className="control-label col-sm-3" htmlFor="amount">Subject</label>
+              <div className="col-xl-5">
+                 <input type="text" className="form-control" id="cname" placeholder="Subject" name="subject" value={subject} onChange={this.handleChange} />
+              </div>
+            </div>
+            <div className="form-group">
+              <label className="control-label col-sm-3" htmlFor="email" >Description :</label>
+              <div className="col-xl-5">
+                <textarea className=" form-control span6" rows="3" placeholder="Write your message" name="message" value={message}  onChange={this.handleChange} />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <div className="col-sm-offset-2 col-sm-30">
+                <button type="submit" className="btn btn-default">Submit</button>
+              </div>
+            </div>
+          </form>
   				</div>
       </div>
 
@@ -69,6 +95,9 @@ class ContactUsForm extends React.Component {
       }
 }
 function mapStateToProps(state) {
+  const {loggedIn}=state.authentication;
+  const {user}=state;
+  return user;
 
 }
 const connectedLoginPage = connect(mapStateToProps)(ContactUsForm);

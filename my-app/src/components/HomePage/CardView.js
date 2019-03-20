@@ -23,9 +23,9 @@ class CardView extends React.Component {
          submitted:false,
          id:id
        };
-
-
-
+     }
+     componentDidMount() {
+       window.scrollTo(0, 0)
      }
      handleClick() {
        const { dispatch }=this.props;
@@ -97,16 +97,24 @@ class CardView extends React.Component {
 
 
 		</div>
-    <div  style={{ "marginTop": "100px","marginLeft": "100px","width": "800px","height":"800px"}}>
-    <table>
+    <div  style={{ "marginTop": "100px","marginLeft": "100px","marginBottom": "100px","width": "800px","height":"400px","border":"1px solid #cfcfcf"}}>
+    <table style={{"margin":"20px 0px 0px 20px"}}>
       <tbody>
 
         <tr><td><h1 className="fundName">{this.state.item.sname}</h1></td></tr>
+        <br />
+
         <tr><td><h6 className="fundName">Fund Details</h6></td></tr>
-        <tr><td>{this.state.item.cname}</td></tr>
-        <tr><td>{this.state.item.iamount}</td></tr>
-        <tr><td>{this.state.item.description}</td></tr>
-       <button type="button" class="btn btn-success" onClick={this.handleClick} style={{"float":"right"}}>Invest Now</button>
+        <br />
+        <tr><td>Company Name:</td><td>{this.state.item.cname}</td></tr>
+        <tr><td>Fund Category:</td><td>{this.state.item.category}</td></tr>
+        <tr><td>Minimum SIP amount:</td><td>₹{" " + this.state.item.iamount}</td></tr>
+        <tr>Description:<td>{this.state.item.description}</td></tr>
+        <br />
+        <tr><td>      <Link to="/home">  <button className="btn btn-warning">
+                  <i className="fa fa-angle-left" /> Back
+                </button>
+                </Link></td><td><button type="button" class="btn btn-success" onClick={this.handleClick}>Invest Now</button></td></tr>
         <div>
 
 

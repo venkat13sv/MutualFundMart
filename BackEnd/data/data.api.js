@@ -4,18 +4,26 @@ const dataService=require('./data.service');
 
 router.get('/schemes', getAllSchemes);
 router.post('/myschemes', getAllMySchemes);
+router.post('/feedback',saveFeedback)
 
 module.exports=router;
 
 function getAllSchemes(req, res, next) {
   dataService.getAllSchemes()
-      .then(users => res.json(users))
+      .then(schemes => res.json(schemes))
       .catch(err => next(err));
 }
 
 function getAllMySchemes(req, res, next) {
   console.log(req.body);
   dataService.getAllMySchemes(req.body)
-      .then(users => res.json(users))
+      .then(schemes => res.json(schemes))
+      .catch(err => next(err));
+}
+
+function saveFeedback(req, res, next) {
+  console.log(req.body);
+  dataService.saveFeedback(req.body)
+      .then(message => res.json(message))
       .catch(err => next(err));
 }
