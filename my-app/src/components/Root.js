@@ -11,6 +11,7 @@ import ContactUs from './MainPage/ContactUs.js';
 //import { PrivateRoute } from './PrivateRoute/PrivateRoute.js';
 import { Admin }  from '../Admin/Admin.js';
 import { AdminPanel } from '../Admin/AdminPanel.js';
+import { AllUsers } from '../Admin/AllUsers.js';
 import {CardView} from '../components/HomePage/CardView.js';
 import  {CheckoutForm}  from '../components/Payment/Payment.js';
 import { Confirm } from '../components/Payment/Confirm.js';
@@ -27,6 +28,7 @@ const Root=()=>(
                            <Route exact path="/home" component={HomePage} />
                            <Route exact path="/contact" component={ContactUs} />
                            <Route exact path="/admin/panel" component={AdminPanel}/>
+                            <Route exact path="/admin/panel/users" component={AllUsers}/>
                            <Route exact path="/admin" component={Admin}/>
                            <Route exact path="/schemes/:id" component={CardView}/>
                            <Route exact path="/checkoutform" component={CheckoutForm}/>

@@ -3,7 +3,8 @@ import { adminAuthHeader } from '../_helpers/admin.auth-header.js';
 export const adminService = {
     login,
     logout,
-    addNewScheme
+    addNewScheme,
+    getAllUsers
   };
   function login(aname, password) {
       const requestOptions = {
@@ -38,6 +39,27 @@ export const adminService = {
     console.log("Request Option" + JSON.stringify(requestOptions));
 
     return fetch(`http://localhost:4000/admin/schemes/add`, requestOptions)
+        .then(handleResponse)
+        .then(data => {
+            // store admin details and jwt token in local storage to keep admin logged in between page refreshes
+            //localStorage.setItem('admin', JSON.stringify(admin));
+
+            return data;
+        },
+        error =>{
+          return error;
+        });
+
+  }
+  function getAllUsers() {
+    const requestOptions = {
+        method: 'GET',
+
+        headers: {...adminAuthHeader()}
+    };
+    console.log("Request Option" + JSON.stringify(requestOptions));
+
+    return fetch(`http://localhost:4000/api/users`, requestOptions)
         .then(handleResponse)
         .then(data => {
             // store admin details and jwt token in local storage to keep admin logged in between page refreshes
