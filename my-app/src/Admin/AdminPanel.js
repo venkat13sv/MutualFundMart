@@ -98,10 +98,10 @@ render() {
     <div className="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
       <nav className="link-effect-2" id="link-effect-2">
         <ul className="nav navbar-nav">
-          <li className="active"><a href="#"><span data-hover="Categories and Schemes">Add scheme</span></a></li>
-          <li ><Link to="/mySchemes"><span data-hover="My Schemes">All</span></Link></li>
-          <li><a href="#"><span data-hover="Profile">All</span></a></li>
-          <li><a href="#"><span data-hover="Events"></span></a></li>
+          <li className="active"><a href="#"><span data-hover="Add scheme">Add scheme</span></a></li>
+          <li ><Link to="/mySchemes"><span data-hover="All">All</span></Link></li>
+          <li><a href="#"><span data-hover="All">All</span></a></li>
+          <li><a href="#"><span data-hover=""></span></a></li>
 
           <li><a href="#"><span data-hover="FeedBack">FeedBack</span></a></li>
         </ul>

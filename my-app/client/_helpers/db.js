@@ -1,6 +1,13 @@
-const config = require('config.json');
+//const config = require('config.json');
 const mongoose = require('mongoose');
-mongoose.connect(process.env.MONGODB_URI || config.connectionString);
+mongoose.connect("mongodb+srv://siva95:GmR3QhnlnocfxUZW@funding-ac3ti.mongodb.net/test?retryWrites=true",
+function(error){
+    if(error) console.log(error);
+
+        console.log("connection successful");
+}
+);
+
 mongoose.Promise = global.Promise;
 
 module.exports = {
